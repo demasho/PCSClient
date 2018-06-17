@@ -3,6 +3,7 @@ package application;
 import java.io.IOException;
 
 import client.ChatClient;
+import client.ChatIF;
 import client.ClientConsole;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;

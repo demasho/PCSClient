@@ -41,12 +41,15 @@ public class CasualParkingController extends Main {
 
 	@FXML
 	private TextField email_field;
+	private ClientConsole console = ClientConsole.getInstance();
+	private ChatClient client=console.getClient();
 
 
 	@FXML
 	void NextOrderAction(ActionEvent event) throws IOException 
 	{	
-		String send="CasualOrder: ";
+		StringBuilder sent=new StringBuilder();
+		sent.append("CasualParking : ");
 		String person_id = null;
 		String car_id;
 		String end_minute = null;
@@ -64,6 +67,7 @@ public class CasualParkingController extends Main {
 			person_id=person_id_text.getText().trim();
 			if( Validator.isValidPersonId(person_id)==false )
 				throw new Exception();
+			sent.append(person_id + " ");
 		}catch (Exception e) {
 			person_id_text.setText("invalid input;");
 			person_id_text.setStyle("-fx-text-inner-color: red;");
@@ -74,6 +78,7 @@ public class CasualParkingController extends Main {
 			car_id=car_id_text.getText().trim();
 			if( Validator.isValidCarNumber(car_id)==false)
 				throw new Exception();
+			sent.append(car_id + " ");	
 		}catch(Exception e){
 			car_id_text.setText("invalid input");
 			car_id_text.setStyle("-fx-text-inner-color: red;");
@@ -86,7 +91,7 @@ public class CasualParkingController extends Main {
 			end_hour =end_hour_field.getText().trim();
 			if(!Validator.isValidEndTime(end_minute, end_hour))
 				throw new Exception();
-
+			sent.append(end_hour + ":" + end_minute);
 		}catch(Exception e){
 			end_hour_field.setText("invalid input");
 			end_hour_field.setStyle("-fx-text-inner-color: red;");
@@ -98,17 +103,18 @@ public class CasualParkingController extends Main {
 		try {
 			email=email_field.getText().trim();
 			if(!Validator.isValidEmailAddress(email))
-			{
 				throw new Exception();
-
-			}
+			sent.append(" " + email);
 		}catch(Exception e){
 			email_field.setText("invalid input");
 			email_field.setStyle("-fx-text-inner-color: red;");
 			flag=false;
 		}
 		if(flag==true)
-			AlertBox.display("Loading", "Loading .....", "Please Wait");
+		{
+			AlertBox.display("Loading", "Loading .....", "Please Waitt");
+			//client.handleMessageFromClientUI(sent.toString());
+		}
 		else
 			AlertBox.display("הזמנת חניה", "הנתונים שגויים", "נא לעדכן את הנתונים");
 

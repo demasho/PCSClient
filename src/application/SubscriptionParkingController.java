@@ -68,6 +68,8 @@ public class SubscriptionParkingController {
 		
 		try {
 			start_date=start_date_field.toString();
+			//if(!Validator.isValidArrivalDate(start_date);
+				//throw new Exception();
 		}catch(Exception e){
 			//start_date_field.setText("invalid input");
 			start_date_field.setStyle("-fx-text-inner-color: red;");
@@ -79,7 +81,6 @@ public class SubscriptionParkingController {
 			if(!Validator.isValidEmailAddress(email))
 			{
 				throw new Exception();
-
 			}
 		}catch(Exception e){
 			email_field.setText("invalid input");
@@ -87,7 +88,6 @@ public class SubscriptionParkingController {
 			flag=false;
 		}
 		
-		if(flag==false)
 			if(flag==true)
 				AlertBox.display("Loading", "Loading .....", "Please Wait");
 			else
