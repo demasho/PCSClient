@@ -133,45 +133,46 @@ public class OneTimeParkingController {
 		}
 		try {
 			LocalDate startlocalDate = start_date_text.getValue();
+			try {
+				start_time_minute =start_minute_text.getText().trim();
+				start_time_hour =start_hour_text.getText().trim();
+				if(!Validator.isValidEndTime(start_time_minute, start_time_hour))
+					throw new Exception();
+				sent.append(startlocalDate);
+				sent.append("/"+start_time_hour + ":" + start_time_minute + " ");
+			}catch(Exception e){
+				start_hour_text.setText("invalid input");
+				start_hour_text.setStyle("-fx-text-inner-color: red;");
+				start_minute_text.setText("invalid input");
+				start_minute_text.setStyle("-fx-text-inner-color: red;");
+				flag=false;
+			}
 			LocalDate endlocalDate=end_date_text.getValue();
+			try {
+				end_time_minute =end_minute_field.getText().trim();
+				end_time_hour =end_hour_field.getText().trim();
+				if(!Validator.isValidEndTime(end_time_minute, end_time_hour))
+					throw new Exception();
+				sent.append(endlocalDate);
+				sent.append("/"+end_time_hour + ":" + end_time_minute + " ");
+			}catch(Exception e){
+				end_hour_field.setText("invalid input");
+				end_hour_field.setStyle("-fx-text-inner-color: red;");
+				end_minute_field.setText("invalid input");
+				end_minute_field.setStyle("-fx-text-inner-color: red;");
+				flag=false;
+			}
 		//	if(!Validator.isValidDates(startlocalDate.toString(), endlocalDate.toString()))
 			//{
 				//throw new Exception();
 
 			//}
-			sent.append(startlocalDate+ " ");
-			sent.append(endlocalDate + " ");
+
 		}catch(Exception e)
 		{
 
 		}
-		try {
-			start_time_minute =start_minute_text.getText().trim();
-			start_time_hour =start_hour_text.getText().trim();
-			if(!Validator.isValidEndTime(start_time_minute, start_time_hour))
-				throw new Exception();
-			sent.append(start_time_hour + ":" + start_time_minute + " ");
-		}catch(Exception e){
-			start_hour_text.setText("invalid input");
-			start_hour_text.setStyle("-fx-text-inner-color: red;");
-			start_minute_text.setText("invalid input");
-			start_minute_text.setStyle("-fx-text-inner-color: red;");
-			flag=false;
-		}
-
-		try {
-			end_time_minute =end_minute_field.getText().trim();
-			end_time_hour =end_hour_field.getText().trim();
-			if(!Validator.isValidEndTime(end_time_minute, end_time_hour))
-				throw new Exception();
-			sent.append(end_time_hour + ":" + end_time_minute + " ");
-		}catch(Exception e){
-			end_hour_field.setText("invalid input");
-			end_hour_field.setStyle("-fx-text-inner-color: red;");
-			end_minute_field.setText("invalid input");
-			end_minute_field.setStyle("-fx-text-inner-color: red;");
-			flag=false;
-		}
+		
 		if(flag==true)
 		{
 			AlertBox.display("Loading", "Loading .....", "Please Wait");

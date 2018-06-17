@@ -15,7 +15,7 @@ public class CancelOrderController {
 
 	@FXML
 	private Button cancelButton;
-	
+
 	private ClientConsole console = ClientConsole.getInstance();
 	private ChatClient client=console.getClient();
 
@@ -29,7 +29,7 @@ public class CancelOrderController {
 		AlertBox.display("ביטול חניה", "נא לחכות", "העניין בטיפול");
 		client.handleMessageFromClientUI(sent.toString());
 		AlertBox.display("ביטול חניה", "הביטול התבצע בהצלחה", "תודה ולהתראות");
-		
+
 	}
 
 }

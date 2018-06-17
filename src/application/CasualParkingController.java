@@ -123,12 +123,12 @@ public class CasualParkingController extends Main {
 
 	@FXML
 	void back_order_action(ActionEvent event) throws IOException {
-    	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("OrderParkScene.fxml"));
-    	BorderPane root1 = fxmlLoader.load();
-    	Stage stage = new Stage();
-    	stage.setScene(new Scene(root1));  
-    	stage.show();
-    	stage.setOnCloseRequest(e -> Platform.exit());
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("OrderParkScene.fxml"));
+		BorderPane root1 = fxmlLoader.load();
+		Stage stage = new Stage();
+		stage.setScene(new Scene(root1));  
+		stage.show();
+		stage.setOnCloseRequest(e -> Platform.exit());
 	}
 
 }

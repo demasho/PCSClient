@@ -10,20 +10,20 @@ import javafx.scene.input.MouseEvent;
 
 public class ComplaintController {
 
-    @FXML
-    private TextField person_id_text;
+	@FXML
+	private TextField person_id_text;
 
-    @FXML
-    private TextField order_id_text;
+	@FXML
+	private TextField order_id_text;
 
-    @FXML
-    private TextArea complaint_text;
+	@FXML
+	private TextArea complaint_text;
 
-    @FXML
-    private Button complaintButton;
+	@FXML
+	private Button complaintButton;
 
-    @FXML
-    void complaintButtonClick(MouseEvent event) {
+	@FXML
+	void complaintButtonClick(MouseEvent event) {
 		String person_id = null;
 		String order_id = null;
 		String complaint;
@@ -53,25 +53,24 @@ public class ComplaintController {
 		}
 
 		complaint=complaint_text.getText().trim();
-		
+
 		if(flag==true)
 			AlertBox.display("Loading", "Loading .....", "Please Wait");
 		else
 			AlertBox.display("הגשת תלונה", "הנתונים שגויים", "נא לעדכן את הנתונים");
-	    StringBuilder sent=new StringBuilder();
-	    sent.append("SUBMISSION_COMPLAINT : ");
-	    sent.append(person_id);
-	    sent.append(" ");
-	    sent.append(order_id);
-	    sent.append(" ");
-	    sent.append(complaint);
-    	ClientConsole console=ClientConsole.getInstance();
-    	ChatClient client=console.getClient();
-    	client.handleMessageFromClientUI(sent.toString());
-	    
+		StringBuilder sent=new StringBuilder();
+		sent.append("SUBMISSION_COMPLAINT : ");
+		sent.append(person_id);
+		sent.append(" ");
+		sent.append(order_id);
+		sent.append(" ");
+		sent.append(complaint);
+		ClientConsole console=ClientConsole.getInstance();
+		ChatClient client=console.getClient();
+		client.handleMessageFromClientUI(sent.toString());
 
-    }
 
-    
+	}
+
 
 }
