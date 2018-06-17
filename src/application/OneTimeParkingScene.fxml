@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane prefHeight="446.0" prefWidth="644.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.OneTimeParkingController">
+   <top>
+      <StackPane prefHeight="102.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#6bdfff" height="104.0" stroke="BLACK" strokeType="INSIDE" width="656.0" />
+            <Label text="הזמנת חניה חד פעמית">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Label>
+         </children>
+      </StackPane>
+   </top>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text layoutX="20.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="תאריך הגעה:">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Text>
+            <Text layoutX="20.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="זמן הגעה:">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Text>
+            <Text layoutX="20.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="תאריך סיום:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Text layoutX="20.0" layoutY="172.0" strokeType="OUTSIDE" strokeWidth="0.0" text="זמן סיום:">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Text>
+         </children></AnchorPane>
+   </center>
+   <right>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text layoutX="86.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="מספר רכב:">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Text>
+            <TextField fx:id="car_id_text" layoutX="-67.0" layoutY="59.0" />
+            <TextField fx:id="person_id_text" layoutX="-67.0" layoutY="13.0" />
+            <Text layoutX="86.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="החניון המבוקש:">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Text>
+            <TextField fx:id="park_id_text" layoutX="-67.0" layoutY="107.0" />
+            <Text layoutX="88.0" layoutY="172.0" strokeType="OUTSIDE" strokeWidth="0.0" text="דואר אלקטרוני:">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Text>
+            <TextField fx:id="email_field" layoutX="-69.0" layoutY="155.0" onAction="#email_text" prefHeight="25.0" prefWidth="153.0" promptText="****@******.com" />
+            <Text layoutX="86.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ת&quot;ז:">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+   </right>
+   <bottom>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="next_order_button" layoutX="407.0" layoutY="162.0" mnemonicParsing="false" onAction="#NextOrderAction" prefHeight="25.0" prefWidth="71.0" text="הבא" />
+            <Button fx:id="back_order_button" layoutX="191.0" layoutY="162.0" mnemonicParsing="false" onAction="#back_order_action" prefHeight="25.0" prefWidth="70.0" text="הקודם" />
+         </children>
+      </AnchorPane>
+   </bottom>
+   <left>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <DatePicker fx:id="start_date_text" layoutX="72.0" layoutY="14.0" />
+            <TextField fx:id="start_hour_text" layoutX="138.0" layoutY="63.0" prefHeight="25.0" prefWidth="41.0" promptText="שעה" />
+            <TextField fx:id="start_minute_text" layoutX="205.0" layoutY="63.0" prefHeight="25.0" prefWidth="40.0" promptText="דקה" />
+            <Text layoutX="191.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <DatePicker fx:id="end_date_text" layoutX="72.0" layoutY="110.0" />
+            <TextField fx:id="end_minute_field" layoutX="203.0" layoutY="154.0" prefHeight="25.0" prefWidth="44.0" promptText="דקה" />
+            <TextField fx:id="end_hour_field" layoutX="139.0" layoutY="154.0" prefHeight="25.0" prefWidth="41.0" promptText="שעה" />
+            <Text layoutX="191.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+         </children></AnchorPane>
+   </left>
+</BorderPane>

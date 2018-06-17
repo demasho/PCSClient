@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane prefHeight="446.0" prefWidth="644.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.PayController">
+   <top>
+      <StackPane prefHeight="102.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#6bdfff" height="104.0" stroke="BLACK" strokeType="INSIDE" width="656.0" />
+            <Label text="תשלום חשבון">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Label>
+         </children>
+      </StackPane>
+   </top>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </center>
+   <right>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text layoutX="82.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="מספר הזמנה:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <TextField fx:id="order_id_text" layoutX="-67.0" layoutY="13.0" />
+            <Text layoutX="82.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="מספר כרטיס אשראי:">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Text>
+            <TextField layoutX="-67.0" layoutY="57.0" />
+         </children>
+      </AnchorPane>
+   </right>
+   <bottom>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="next_order_button" layoutX="397.0" layoutY="174.0" mnemonicParsing="false" onAction="#NextOrderAction" prefHeight="25.0" prefWidth="68.0" text="הבא" />
+            <Button fx:id="back_order_button" layoutX="181.0" layoutY="174.0" mnemonicParsing="false" onAction="#back_order_action" prefHeight="25.0" prefWidth="70.0" text="הקודם" />
+            <Text fx:id="loading_text" disable="true" layoutX="79.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="נא לחכות העניין בטיפול..." visible="false">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Text>
+            <Button fx:id="payButton" layoutX="397.0" layoutY="66.0" mnemonicParsing="false" text="לשלם" />
+            <Text layoutX="500.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="החשבון שלך הוא:">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Text>
+            <TextField layoutX="456.0" layoutY="68.0" prefHeight="25.0" prefWidth="36.0" />
+         </children>
+      </AnchorPane>
+   </bottom>
+   <left>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </left>
+</BorderPane>

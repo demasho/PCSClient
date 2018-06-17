@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane prefHeight="446.0" prefWidth="644.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.AdministratorController">
+   <top>
+      <StackPane prefHeight="102.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#6bdfff" height="104.0" stroke="BLACK" strokeType="INSIDE" width="656.0" />
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="581.0" layoutY="44.0" text="שלום,">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Text fx:id="firstname_text" layoutX="503.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="RIGHT" wrappingWidth="68.31640625">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+         </children>
+      </StackPane>
+   </top>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox layoutX="198.0" layoutY="61.0" prefHeight="220.0" prefWidth="260.0">
+               <children>
+                  <Button fx:id="reportsButton" mnemonicParsing="false" onAction="#reportsAction" onMouseClicked="#CasualButtonClick" prefHeight="55.0" prefWidth="260.0" text="תלונות">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="changePricesButton" mnemonicParsing="false" onAction="#changePricesAction" onMouseClicked="#OneParkingButtonClick" prefHeight="55.0" prefWidth="260.0" text="שינוי מחירים">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="reportsAnswersButton" mnemonicParsing="false" onAction="#reportsAnswersAction" onMouseClicked="#SubscriptionButtonClick" prefHeight="55.0" prefWidth="260.0" text="תלונות שקיבלו תשובה">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
+            <Text fx:id="casual_price_text" layoutX="87.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="92.13671875">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
+            <Text fx:id="on_time_park_price" layoutX="91.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
+            <Text fx:id="subscription_price_text" layoutX="83.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
