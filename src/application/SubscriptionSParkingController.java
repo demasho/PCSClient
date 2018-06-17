@@ -18,7 +18,8 @@ import javafx.stage.Stage;
 public class SubscriptionSParkingController {
 	private ClientConsole console = ClientConsole.getInstance();
 	private ChatClient client=console.getClient();
-	
+	public static boolean flag1 =true;
+
 	@FXML
 	private TextField car_id_text0;
 
@@ -76,9 +77,17 @@ public class SubscriptionSParkingController {
 		String email = null;
 		boolean flag=true;
 		person_id_text.setStyle("-fx-text-inner-color: black;");
-//		car_id_text.setStyle("-fx-text-inner-color: black;");
-//		email_field.setStyle("-fx-text-inner-color: black;");
-		//////////
+		car_id_text0.setStyle("-fx-text-inner-color: black;");
+		car_id_text1.setStyle("-fx-text-inner-color: black;");
+		car_id_text2.setStyle("-fx-text-inner-color: black;");
+		car_id_text3.setStyle("-fx-text-inner-color: black;");
+		car_id_text4.setStyle("-fx-text-inner-color: black;");
+		car_id_text5.setStyle("-fx-text-inner-color: black;");
+		car_id_text6.setStyle("-fx-text-inner-color: black;");
+		car_id_text7.setStyle("-fx-text-inner-color: black;");
+		car_id_text8.setStyle("-fx-text-inner-color: black;");
+		email_field.setStyle("-fx-text-inner-color: black;");
+		numberOfCars.setStyle("-fx-text-inner-color: black;");
 		try
 		{
 			person_id=person_id_text.getText().trim();
@@ -123,50 +132,147 @@ public class SubscriptionSParkingController {
 			email_field.setStyle("-fx-text-inner-color: red;");
 			flag=false;
 		}
-		int foo = Integer.parseInt(numberOfCars.getText().trim());
-		
-		sent.append("Yes " + foo + " ");
-
-		/*try {
-			car_id=car_id_text.getText().trim();
-			if( Validator.isValidCarNumber(car_id)==false)
+		int foo =0;
+		try {
+			foo = Integer.parseInt(numberOfCars.getText().trim());
+			if(foo<=0)
 				throw new Exception();
-			sent.append(car_id + " ");
+			sent.append("Yes " + foo + " ");
 		}catch(Exception e){
-			car_id_text.setText("invalid input");
-//			car_id_text.setStyle("-fx-text-inner-color: red;");
+			numberOfCars.setText("invalid input");
+			numberOfCars.setStyle("-fx-text-inner-color: red;");
 			flag=false;
-		}*/
-
+		}
+		//numbers of cars
 		switch(foo)
 		{
 		case 1:
 			car_id_text0.setDisable(false);
-			sent.append(car_id_text0.getText().trim() + " ");
+			if(flag1==false)
+				try {
+					car_id=car_id_text0.getText().trim();
+					if( Validator.isValidCarNumber(car_id)==false)
+						throw new Exception();
+					sent.append(car_id + " ");
+				}catch(Exception e){
+					car_id_text0.setText("invalid input");
+					car_id_text0.setStyle("-fx-text-inner-color: red;");
+					flag=false;
+				}
 			break;
 		case 2:
 			car_id_text0.setDisable(false);
 			car_id_text1.setDisable(false);
-			sent.append(car_id_text0.getText().trim() + " ");
-			sent.append(car_id_text1.getText().trim() + " ");
+			if(flag1==false)
+			{
+				try {
+					car_id=car_id_text0.getText().trim();
+					if( Validator.isValidCarNumber(car_id)==false)
+						throw new Exception();
+					sent.append(car_id + " ");
+				}catch(Exception e){
+					car_id_text0.setText("invalid input");
+					car_id_text0.setStyle("-fx-text-inner-color: red;");
+					flag=false;
+				}
+				try {
+					car_id=car_id_text1.getText().trim();
+					if( Validator.isValidCarNumber(car_id)==false)
+						throw new Exception();
+					sent.append(car_id + " ");
+				}catch(Exception e){
+					car_id_text1.setText("invalid input");
+					car_id_text1.setStyle("-fx-text-inner-color: red;");
+					flag=false;
+				}
+			}
 			break;
 		case 3:
 			car_id_text0.setDisable(false);
 			car_id_text1.setDisable(false);
 			car_id_text2.setDisable(false);
-			sent.append(car_id_text0.getText().trim() + " ");
-			sent.append(car_id_text1.getText().trim() + " ");
-			sent.append(car_id_text2.getText().trim() + " ");
+			if(flag1==false)
+			{
+				try {
+					car_id=car_id_text0.getText().trim();
+					if( Validator.isValidCarNumber(car_id)==false)
+						throw new Exception();
+					sent.append(car_id + " ");
+				}catch(Exception e){
+					car_id_text0.setText("invalid input");
+					car_id_text0.setStyle("-fx-text-inner-color: red;");
+					flag=false;
+				}
+				try {
+					car_id=car_id_text1.getText().trim();
+					if( Validator.isValidCarNumber(car_id)==false)
+						throw new Exception();
+					sent.append(car_id + " ");
+				}catch(Exception e){
+					car_id_text1.setText("invalid input");
+					car_id_text1.setStyle("-fx-text-inner-color: red;");
+					flag=false;
+				}
+				try {
+					car_id=car_id_text2.getText().trim();
+					if( Validator.isValidCarNumber(car_id)==false)
+						throw new Exception();
+					sent.append(car_id + " ");
+				}catch(Exception e){
+					car_id_text2.setText("invalid input");
+					car_id_text2.setStyle("-fx-text-inner-color: red;");
+					flag=false;
+				}
+			}
 			break;
 		case 4:
 			car_id_text0.setDisable(false);
 			car_id_text1.setDisable(false);
 			car_id_text2.setDisable(false);
 			car_id_text3.setDisable(false);
-			sent.append(car_id_text0.getText().trim() + " ");
-			sent.append(car_id_text1.getText().trim() + " ");
-			sent.append(car_id_text2.getText().trim() + " ");
-			sent.append(car_id_text3.getText().trim() + " ");
+			if(flag1==false)
+			{
+				try {
+					car_id=car_id_text0.getText().trim();
+					if( Validator.isValidCarNumber(car_id)==false)
+						throw new Exception();
+					sent.append(car_id + " ");
+				}catch(Exception e){
+					car_id_text0.setText("invalid input");
+					car_id_text0.setStyle("-fx-text-inner-color: red;");
+					flag=false;
+				}
+				try {
+					car_id=car_id_text1.getText().trim();
+					if( Validator.isValidCarNumber(car_id)==false)
+						throw new Exception();
+					sent.append(car_id + " ");
+				}catch(Exception e){
+					car_id_text1.setText("invalid input");
+					car_id_text1.setStyle("-fx-text-inner-color: red;");
+					flag=false;
+				}
+				try {
+					car_id=car_id_text2.getText().trim();
+					if( Validator.isValidCarNumber(car_id)==false)
+						throw new Exception();
+					sent.append(car_id + " ");
+				}catch(Exception e){
+					car_id_text2.setText("invalid input");
+					car_id_text2.setStyle("-fx-text-inner-color: red;");
+					flag=false;
+				}
+				try {
+					car_id=car_id_text3.getText().trim();
+					if( Validator.isValidCarNumber(car_id)==false)
+						throw new Exception();
+					sent.append(car_id + " ");
+				}catch(Exception e){
+					car_id_text3.setText("invalid input");
+					car_id_text3.setStyle("-fx-text-inner-color: red;");
+					flag=false;
+				}
+			}
 			break;
 		case 5:
 			car_id_text0.setDisable(false);
@@ -174,12 +280,60 @@ public class SubscriptionSParkingController {
 			car_id_text2.setDisable(false);
 			car_id_text3.setDisable(false);
 			car_id_text4.setDisable(false);
-			sent.append(car_id_text0.getText().trim() + " ");
-			sent.append(car_id_text1.getText().trim() + " ");
-			sent.append(car_id_text2.getText().trim() + " ");
-			sent.append(car_id_text3.getText().trim() + " ");
-			sent.append(car_id_text4.getText().trim()+ " ");
-			break;
+			if(flag1==false)
+			{
+				try {
+					car_id=car_id_text0.getText().trim();
+					if( Validator.isValidCarNumber(car_id)==false)
+						throw new Exception();
+					sent.append(car_id + " ");
+				}catch(Exception e){
+					car_id_text0.setText("invalid input");
+					car_id_text0.setStyle("-fx-text-inner-color: red;");
+					flag=false;
+				}
+				try {
+					car_id=car_id_text1.getText().trim();
+					if( Validator.isValidCarNumber(car_id)==false)
+						throw new Exception();
+					sent.append(car_id + " ");
+				}catch(Exception e){
+					car_id_text1.setText("invalid input");
+					car_id_text1.setStyle("-fx-text-inner-color: red;");
+					flag=false;
+				}
+				try {
+					car_id=car_id_text2.getText().trim();
+					if( Validator.isValidCarNumber(car_id)==false)
+						throw new Exception();
+					sent.append(car_id + " ");
+				}catch(Exception e){
+					car_id_text2.setText("invalid input");
+					car_id_text2.setStyle("-fx-text-inner-color: red;");
+					flag=false;
+				}
+				try {
+					car_id=car_id_text3.getText().trim();
+					if( Validator.isValidCarNumber(car_id)==false)
+						throw new Exception();
+					sent.append(car_id + " ");
+				}catch(Exception e){
+					car_id_text3.setText("invalid input");
+					car_id_text3.setStyle("-fx-text-inner-color: red;");
+					flag=false;
+				}
+				try {
+					car_id=car_id_text4.getText().trim();
+					if( Validator.isValidCarNumber(car_id)==false)
+						throw new Exception();
+					sent.append(car_id + " ");
+				}catch(Exception e){
+					car_id_text4.setText("invalid input");
+					car_id_text4.setStyle("-fx-text-inner-color: red;");
+					flag=false;
+				}
+			}
+
 		case 6:
 			car_id_text0.setDisable(false);
 			car_id_text1.setDisable(false);
@@ -187,12 +341,69 @@ public class SubscriptionSParkingController {
 			car_id_text3.setDisable(false);
 			car_id_text4.setDisable(false);
 			car_id_text5.setDisable(false);
-			sent.append(car_id_text0.getText().trim() + " ");
-			sent.append(car_id_text1.getText().trim() + " ");
-			sent.append(car_id_text2.getText().trim() + " ");
-			sent.append(car_id_text3.getText().trim() + " ");
-			sent.append(car_id_text4.getText().trim()+ " ");
-			sent.append(car_id_text5.getText().trim()+ " ");
+			if(flag1==false)
+			{
+				try {
+					car_id=car_id_text0.getText().trim();
+					if( Validator.isValidCarNumber(car_id)==false)
+						throw new Exception();
+					sent.append(car_id + " ");
+				}catch(Exception e){
+					car_id_text0.setText("invalid input");
+					car_id_text0.setStyle("-fx-text-inner-color: red;");
+					flag=false;
+				}
+				try {
+					car_id=car_id_text1.getText().trim();
+					if( Validator.isValidCarNumber(car_id)==false)
+						throw new Exception();
+					sent.append(car_id + " ");
+				}catch(Exception e){
+					car_id_text1.setText("invalid input");
+					car_id_text1.setStyle("-fx-text-inner-color: red;");
+					flag=false;
+				}
+				try {
+					car_id=car_id_text2.getText().trim();
+					if( Validator.isValidCarNumber(car_id)==false)
+						throw new Exception();
+					sent.append(car_id + " ");
+				}catch(Exception e){
+					car_id_text2.setText("invalid input");
+					car_id_text2.setStyle("-fx-text-inner-color: red;");
+					flag=false;
+				}
+				try {
+					car_id=car_id_text3.getText().trim();
+					if( Validator.isValidCarNumber(car_id)==false)
+						throw new Exception();
+					sent.append(car_id + " ");
+				}catch(Exception e){
+					car_id_text3.setText("invalid input");
+					car_id_text3.setStyle("-fx-text-inner-color: red;");
+					flag=false;
+				}
+				try {
+					car_id=car_id_text4.getText().trim();
+					if( Validator.isValidCarNumber(car_id)==false)
+						throw new Exception();
+					sent.append(car_id + " ");
+				}catch(Exception e){
+					car_id_text4.setText("invalid input");
+					car_id_text4.setStyle("-fx-text-inner-color: red;");
+					flag=false;
+				}
+				try {
+					car_id=car_id_text5.getText().trim();
+					if( Validator.isValidCarNumber(car_id)==false)
+						throw new Exception();
+					sent.append(car_id + " ");
+				}catch(Exception e){
+					car_id_text5.setText("invalid input");
+					car_id_text5.setStyle("-fx-text-inner-color: red;");
+					flag=false;
+				}
+			}
 			break;
 		case 7:
 			car_id_text0.setDisable(false);
@@ -202,13 +413,79 @@ public class SubscriptionSParkingController {
 			car_id_text4.setDisable(false);
 			car_id_text5.setDisable(false);
 			car_id_text6.setDisable(false);
-			sent.append(car_id_text0.getText().trim() + " ");
-			sent.append(car_id_text1.getText().trim() + " ");
-			sent.append(car_id_text2.getText().trim() + " ");
-			sent.append(car_id_text3.getText().trim() + " ");
-			sent.append(car_id_text4.getText().trim()+ " ");
-			sent.append(car_id_text5.getText().trim()+ " ");
-			sent.append(car_id_text6.getText().trim() + " ");
+			if(flag1==false)
+			{
+				try {
+					car_id=car_id_text0.getText().trim();
+					if( Validator.isValidCarNumber(car_id)==false)
+						throw new Exception();
+					sent.append(car_id + " ");
+				}catch(Exception e){
+					car_id_text0.setText("invalid input");
+					car_id_text0.setStyle("-fx-text-inner-color: red;");
+					flag=false;
+				}
+				try {
+					car_id=car_id_text1.getText().trim();
+					if( Validator.isValidCarNumber(car_id)==false)
+						throw new Exception();
+					sent.append(car_id + " ");
+				}catch(Exception e){
+					car_id_text1.setText("invalid input");
+					car_id_text1.setStyle("-fx-text-inner-color: red;");
+					flag=false;
+				}
+				try {
+					car_id=car_id_text2.getText().trim();
+					if( Validator.isValidCarNumber(car_id)==false)
+						throw new Exception();
+					sent.append(car_id + " ");
+				}catch(Exception e){
+					car_id_text2.setText("invalid input");
+					car_id_text2.setStyle("-fx-text-inner-color: red;");
+					flag=false;
+				}
+				try {
+					car_id=car_id_text3.getText().trim();
+					if( Validator.isValidCarNumber(car_id)==false)
+						throw new Exception();
+					sent.append(car_id + " ");
+				}catch(Exception e){
+					car_id_text3.setText("invalid input");
+					car_id_text3.setStyle("-fx-text-inner-color: red;");
+					flag=false;
+				}
+				try {
+					car_id=car_id_text4.getText().trim();
+					if( Validator.isValidCarNumber(car_id)==false)
+						throw new Exception();
+					sent.append(car_id + " ");
+				}catch(Exception e){
+					car_id_text4.setText("invalid input");
+					car_id_text4.setStyle("-fx-text-inner-color: red;");
+					flag=false;
+				}
+				try {
+					car_id=car_id_text5.getText().trim();
+					if( Validator.isValidCarNumber(car_id)==false)
+						throw new Exception();
+					sent.append(car_id + " ");
+				}catch(Exception e){
+					car_id_text5.setText("invalid input");
+					car_id_text5.setStyle("-fx-text-inner-color: red;");
+					flag=false;
+				}
+				try {
+					car_id=car_id_text6.getText().trim();
+					if( Validator.isValidCarNumber(car_id)==false)
+						throw new Exception();
+					sent.append(car_id + " ");
+				}catch(Exception e){
+					car_id_text6.setText("invalid input");
+					car_id_text6.setStyle("-fx-text-inner-color: red;");
+					flag=false;
+				}
+			}
 			break;
 		case 8:
 			car_id_text0.setDisable(false);
@@ -219,14 +496,89 @@ public class SubscriptionSParkingController {
 			car_id_text5.setDisable(false);
 			car_id_text6.setDisable(false);
 			car_id_text7.setDisable(false);
-			sent.append(car_id_text0.getText().trim() + " ");
-			sent.append(car_id_text1.getText().trim() + " ");
-			sent.append(car_id_text2.getText().trim() + " ");
-			sent.append(car_id_text3.getText().trim() + " ");
-			sent.append(car_id_text4.getText().trim()+ " ");
-			sent.append(car_id_text5.getText().trim()+ " ");
-			sent.append(car_id_text6.getText().trim() + " ");
-			sent.append(car_id_text7.getText().trim()+ " ");
+			if(flag1==false)
+			{
+				try {
+					car_id=car_id_text0.getText().trim();
+					if( Validator.isValidCarNumber(car_id)==false)
+						throw new Exception();
+					sent.append(car_id + " ");
+				}catch(Exception e){
+					car_id_text0.setText("invalid input");
+					car_id_text0.setStyle("-fx-text-inner-color: red;");
+					flag=false;
+				}
+				try {
+					car_id=car_id_text1.getText().trim();
+					if( Validator.isValidCarNumber(car_id)==false)
+						throw new Exception();
+					sent.append(car_id + " ");
+				}catch(Exception e){
+					car_id_text1.setText("invalid input");
+					car_id_text1.setStyle("-fx-text-inner-color: red;");
+					flag=false;
+				}
+				try {
+					car_id=car_id_text2.getText().trim();
+					if( Validator.isValidCarNumber(car_id)==false)
+						throw new Exception();
+					sent.append(car_id + " ");
+				}catch(Exception e){
+					car_id_text2.setText("invalid input");
+					car_id_text2.setStyle("-fx-text-inner-color: red;");
+					flag=false;
+				}
+				try {
+					car_id=car_id_text3.getText().trim();
+					if( Validator.isValidCarNumber(car_id)==false)
+						throw new Exception();
+					sent.append(car_id + " ");
+				}catch(Exception e){
+					car_id_text3.setText("invalid input");
+					car_id_text3.setStyle("-fx-text-inner-color: red;");
+					flag=false;
+				}
+				try {
+					car_id=car_id_text4.getText().trim();
+					if( Validator.isValidCarNumber(car_id)==false)
+						throw new Exception();
+					sent.append(car_id + " ");
+				}catch(Exception e){
+					car_id_text4.setText("invalid input");
+					car_id_text4.setStyle("-fx-text-inner-color: red;");
+					flag=false;
+				}
+				try {
+					car_id=car_id_text5.getText().trim();
+					if( Validator.isValidCarNumber(car_id)==false)
+						throw new Exception();
+					sent.append(car_id + " ");
+				}catch(Exception e){
+					car_id_text5.setText("invalid input");
+					car_id_text5.setStyle("-fx-text-inner-color: red;");
+					flag=false;
+				}
+				try {
+					car_id=car_id_text6.getText().trim();
+					if( Validator.isValidCarNumber(car_id)==false)
+						throw new Exception();
+					sent.append(car_id + " ");
+				}catch(Exception e){
+					car_id_text6.setText("invalid input");
+					car_id_text6.setStyle("-fx-text-inner-color: red;");
+					flag=false;
+				}
+				try {
+					car_id=car_id_text7.getText().trim();
+					if( Validator.isValidCarNumber(car_id)==false)
+						throw new Exception();
+					sent.append(car_id + " ");
+				}catch(Exception e){
+					car_id_text7.setText("invalid input");
+					car_id_text7.setStyle("-fx-text-inner-color: red;");
+					flag=false;
+				}
+			}
 			break;
 		case 9:
 			car_id_text0.setDisable(false);
@@ -238,25 +590,115 @@ public class SubscriptionSParkingController {
 			car_id_text6.setDisable(false);
 			car_id_text7.setDisable(false);
 			car_id_text8.setDisable(false);
-			sent.append(car_id_text0.getText().trim() + " ");
-			sent.append(car_id_text1.getText().trim() + " ");
-			sent.append(car_id_text2.getText().trim() + " ");
-			sent.append(car_id_text3.getText().trim() + " ");
-			sent.append(car_id_text4.getText().trim()+ " ");
-			sent.append(car_id_text5.getText().trim()+ " ");
-			sent.append(car_id_text6.getText().trim() + " ");
-			sent.append(car_id_text7.getText().trim()+ " ");
-			sent.append(car_id_text8.getText().trim() + " ");
+			if(flag1==false)
+			{
+				try {
+					car_id=car_id_text0.getText().trim();
+					if( Validator.isValidCarNumber(car_id)==false)
+						throw new Exception();
+					sent.append(car_id + " ");
+				}catch(Exception e){
+					car_id_text0.setText("invalid input");
+					car_id_text0.setStyle("-fx-text-inner-color: red;");
+					flag=false;
+				}
+				try {
+					car_id=car_id_text1.getText().trim();
+					if( Validator.isValidCarNumber(car_id)==false)
+						throw new Exception();
+					sent.append(car_id + " ");
+				}catch(Exception e){
+					car_id_text1.setText("invalid input");
+					car_id_text1.setStyle("-fx-text-inner-color: red;");
+					flag=false;
+				}
+				try {
+					car_id=car_id_text2.getText().trim();
+					if( Validator.isValidCarNumber(car_id)==false)
+						throw new Exception();
+					sent.append(car_id + " ");
+				}catch(Exception e){
+					car_id_text2.setText("invalid input");
+					car_id_text2.setStyle("-fx-text-inner-color: red;");
+					flag=false;
+				}
+				try {
+					car_id=car_id_text3.getText().trim();
+					if( Validator.isValidCarNumber(car_id)==false)
+						throw new Exception();
+					sent.append(car_id + " ");
+				}catch(Exception e){
+					car_id_text3.setText("invalid input");
+					car_id_text3.setStyle("-fx-text-inner-color: red;");
+					flag=false;
+				}
+				try {
+					car_id=car_id_text4.getText().trim();
+					if( Validator.isValidCarNumber(car_id)==false)
+						throw new Exception();
+					sent.append(car_id + " ");
+				}catch(Exception e){
+					car_id_text4.setText("invalid input");
+					car_id_text4.setStyle("-fx-text-inner-color: red;");
+					flag=false;
+				}
+				try {
+					car_id=car_id_text5.getText().trim();
+					if( Validator.isValidCarNumber(car_id)==false)
+						throw new Exception();
+					sent.append(car_id + " ");
+				}catch(Exception e){
+					car_id_text5.setText("invalid input");
+					car_id_text5.setStyle("-fx-text-inner-color: red;");
+					flag=false;
+				}
+				try {
+					car_id=car_id_text6.getText().trim();
+					if( Validator.isValidCarNumber(car_id)==false)
+						throw new Exception();
+					sent.append(car_id + " ");
+				}catch(Exception e){
+					car_id_text6.setText("invalid input");
+					car_id_text6.setStyle("-fx-text-inner-color: red;");
+					flag=false;
+				}
+				try {
+					car_id=car_id_text7.getText().trim();
+					if( Validator.isValidCarNumber(car_id)==false)
+						throw new Exception();
+					sent.append(car_id + " ");
+				}catch(Exception e){
+					car_id_text7.setText("invalid input");
+					car_id_text7.setStyle("-fx-text-inner-color: red;");
+					flag=false;
+				}
+				try {
+					car_id=car_id_text8.getText().trim();
+					if( Validator.isValidCarNumber(car_id)==false)
+						throw new Exception();
+					sent.append(car_id + " ");
+				}catch(Exception e){
+					car_id_text8.setText("invalid input");
+					car_id_text8.setStyle("-fx-text-inner-color: red;");
+					flag=false;
+				}
+			}
 			break;
 		}
-
-		if(flag==true)
+		if(flag1==true)
 		{
-			AlertBox.display("Loading", "Loading .....", "Please Wait");
-			client.handleMessageFromClientUI(sent.toString());
+			flag1=false;
 		}
 		else
-			AlertBox.display("הזמנת חניה", "הנתונים שגויים", "נא לעדכן את הנתונים");					
+		{
+			if(flag==true)
+			{
+				AlertBox.display("Loading", "Loading .....", "Please Wait");
+				client.handleMessageFromClientUI(sent.toString());
+			}
+			else
+				AlertBox.display("הזמנת חניה", "הנתונים שגויים", "נא לעדכן את הנתונים");
+		}
 
 	}
 
