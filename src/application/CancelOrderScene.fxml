@@ -34,7 +34,7 @@
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
                         <TextField layoutX="281.0" layoutY="14.0" />
-                        <TextField layoutX="281.0" layoutY="58.0" />
+                        <TextField fx:id="order_id" layoutX="281.0" layoutY="58.0" />
                      </children>
                   </AnchorPane>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
