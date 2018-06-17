@@ -5,6 +5,9 @@ import javafx.event.ActionEvent;
 
 import java.io.IOException;
 import java.sql.Date;
+
+import client.ChatClient;
+import client.ClientConsole;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -34,12 +37,18 @@ public class SubscriptionParkingController {
 
     @FXML
     private TextField email_field;
+    
+	private ClientConsole console = ClientConsole.getInstance();
+	private ChatClient client=console.getClient();
+	
     boolean flag=true;
     @FXML
     void NextOrderAction(ActionEvent event) {
+		StringBuilder sent=new StringBuilder();
+		StringBuilder start_date=new StringBuilder();
+		sent.append("MonthlySubscription : ");
     	String person_id = null;
 		String car_id;
-		String start_date;
 		String email = null;
 		person_id_text.setStyle("-fx-text-inner-color: black;");
 		car_id_text.setStyle("-fx-text-inner-color: black;");
@@ -50,46 +59,54 @@ public class SubscriptionParkingController {
 			person_id=person_id_text.getText().trim();
 			if( Validator.isValidPersonId(person_id)==false )
 				throw new Exception();
+			sent.append(person_id + " ");
 		}catch (Exception e) {
 			person_id_text.setText("invalid input;");
 			person_id_text.setStyle("-fx-text-inner-color: red;");
 			flag=false;
 		}
-
-		try {
-			car_id=car_id_text.getText().trim();
-			if( Validator.isValidCarNumber(car_id)==false)
-				throw new Exception();
-		}catch(Exception e){
-			car_id_text.setText("invalid input");
-			car_id_text.setStyle("-fx-text-inner-color: red;");
-			flag=false;
-		}
 		
 		try {
-			start_date=start_date_field.toString();
 			//if(!Validator.isValidArrivalDate(start_date);
 				//throw new Exception();
+			sent.append(start_date_field.getValue().getYear() + "-" + start_date_field.getValue().getMonthValue() + "-" + start_date_field.getValue().getDayOfMonth() + " ");
 		}catch(Exception e){
 			//start_date_field.setText("invalid input");
 			start_date_field.setStyle("-fx-text-inner-color: red;");
 			flag=false;
 		}
 
+
 		try {
 			email=email_field.getText().trim();
 			if(!Validator.isValidEmailAddress(email))
-			{
 				throw new Exception();
-			}
+			sent.append(email + " ");
 		}catch(Exception e){
 			email_field.setText("invalid input");
 			email_field.setStyle("-fx-text-inner-color: red;");
 			flag=false;
 		}
 		
+		sent.append("No 1 ");
+		
+		try {
+			car_id=car_id_text.getText().trim();
+			if( Validator.isValidCarNumber(car_id)==false)
+				throw new Exception();
+			sent.append(car_id + " ");
+		}catch(Exception e){
+			car_id_text.setText("invalid input");
+			car_id_text.setStyle("-fx-text-inner-color: red;");
+			flag=false;
+		}
+		
+		
 			if(flag==true)
+			{
 				AlertBox.display("Loading", "Loading .....", "Please Wait");
+				client.handleMessageFromClientUI(sent.toString());
+			}
 			else
 				AlertBox.display("הזמנת חניה", "הנתונים שגויים", "נא לעדכן את הנתונים");
     }

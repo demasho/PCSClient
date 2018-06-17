@@ -113,7 +113,7 @@ public class CasualParkingController extends Main {
 		if(flag==true)
 		{
 			AlertBox.display("Loading", "Loading .....", "Please Waitt");
-			//client.handleMessageFromClientUI(sent.toString());
+			client.handleMessageFromClientUI(sent.toString());
 		}
 		else
 			AlertBox.display("הזמנת חניה", "הנתונים שגויים", "נא לעדכן את הנתונים");
