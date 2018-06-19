@@ -71,7 +71,6 @@ public class FirstWindow extends Application {
 			public void handle(ActionEvent event) {
 				Login login = new Login();
 				login.start(new Stage());
-				
 			}
 		});
 		 

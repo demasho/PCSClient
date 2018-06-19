@@ -69,7 +69,9 @@ public class SubscriptionParkingController {
 		try {
 			//if(!Validator.isValidArrivalDate(start_date);
 				//throw new Exception();
-			sent.append(start_date_field.getValue().getYear() + "-" + start_date_field.getValue().getMonthValue() + "-" + start_date_field.getValue().getDayOfMonth() + " ");
+			sent.append(start_date_field.getValue().getYear() + "-"
+				+ start_date_field.getValue().getMonthValue() + "-"
+					+ start_date_field.getValue().getDayOfMonth() + "/00:00:00 ");
 		}catch(Exception e){
 			//start_date_field.setText("invalid input");
 			start_date_field.setStyle("-fx-text-inner-color: red;");
@@ -88,7 +90,7 @@ public class SubscriptionParkingController {
 			flag=false;
 		}
 		
-		sent.append("No 1 ");
+		sent.append("false 1 , ");
 		
 		try {
 			car_id=car_id_text.getText().trim();
@@ -119,6 +121,8 @@ public class SubscriptionParkingController {
     	stage.setScene(new Scene(root1));  
     	stage.show();
     	stage.setOnCloseRequest(e -> Platform.exit());
+       	Stage curr = (Stage)back_order_button.getScene().getWindow();
+		curr.close();
     }
 
 }

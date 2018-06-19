@@ -167,6 +167,7 @@ public class OneTimeParkingController {
 				//throw new Exception();
 
 			//}
+			System.out.println("Here: " + sent);
 
 		}catch(Exception e)
 		{
@@ -179,7 +180,9 @@ public class OneTimeParkingController {
 			client.handleMessageFromClientUI(sent.toString());
 		}	
 		else
-			AlertBox.display("הזמנת חניה", "הנתונים שגויים", "נא לעדכן את הנתונים");
+			AlertBox.display("הזמנת חניה", "הנתונים שגויים", "נא לעדכן את הנתונים");	
+		Stage curr = (Stage)next_order_button.getScene().getWindow();
+		curr.close();
 
 
 	}
@@ -193,6 +196,8 @@ public class OneTimeParkingController {
 		stage.setScene(new Scene(root1));  
 		stage.show();
 		stage.setOnCloseRequest(e -> Platform.exit());
+		Stage curr = (Stage) back_order_button.getScene().getWindow();
+		curr.close();
 	}
 
 	@FXML

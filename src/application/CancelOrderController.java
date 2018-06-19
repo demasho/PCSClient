@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class CancelOrderController {
 
@@ -29,7 +30,7 @@ public class CancelOrderController {
 		AlertBox.display("ביטול חניה", "נא לחכות", "העניין בטיפול");
 		client.handleMessageFromClientUI(sent.toString());
 		AlertBox.display("ביטול חניה", "הביטול התבצע בהצלחה", "תודה ולהתראות");
-
+       	Stage curr = (Stage)cancelButton.getScene().getWindow();
+		curr.close();
 	}
-
 }

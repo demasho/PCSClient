@@ -103,7 +103,18 @@ public class SubscriptionSParkingController {
 		try {
 			//if(!Validator.isValidArrivalDate(start_date);
 			//throw new Exception();
-			sent.append(start_date_field.getValue().getYear() + "-" + start_date_field.getValue().getMonthValue() + "-" + start_date_field.getValue().getDayOfMonth() + " ");
+			String month="" ;
+			String day="" ;
+			if(start_date_field.getValue().getMonthValue() <= 9)
+				month = "0"+Integer.toString(start_date_field.getValue().getMonthValue());
+			else 
+				month = Integer.toString(start_date_field.getValue().getMonthValue()) ;
+			if(start_date_field.getValue().getDayOfMonth() <= 9)
+				day=("0"+start_date_field.getValue().getDayOfMonth());
+			else 
+				day=Integer.toString(start_date_field.getValue().getDayOfMonth());
+			sent.append(start_date_field.getValue().getYear() + "-" + month 
+					+ "-" + day + "/00:00:00 ");
 		}catch(Exception e){
 			//start_date_field.setText("invalid input");
 			start_date_field.setStyle("-fx-text-inner-color: red;");
@@ -121,23 +132,13 @@ public class SubscriptionSParkingController {
 			email_field.setStyle("-fx-text-inner-color: red;");
 			flag=false;
 		}
-
-		try {
-			email=email_field.getText().trim();
-			if(!Validator.isValidEmailAddress(email))
-				throw new Exception();
-			sent.append(email + " ");
-		}catch(Exception e){
-			email_field.setText("invalid input");
-			email_field.setStyle("-fx-text-inner-color: red;");
-			flag=false;
-		}
+		
 		int foo =0;
 		try {
 			foo = Integer.parseInt(numberOfCars.getText().trim());
 			if(foo<=0)
 				throw new Exception();
-			sent.append("Yes " + foo + " ");
+			sent.append("true " + foo + " , ");
 		}catch(Exception e){
 			numberOfCars.setText("invalid input");
 			numberOfCars.setStyle("-fx-text-inner-color: red;");
@@ -693,6 +694,7 @@ public class SubscriptionSParkingController {
 		{
 			if(flag==true)
 			{
+				System.out.println(sent.toString());
 				AlertBox.display("Loading", "Loading .....", "Please Wait");
 				client.handleMessageFromClientUI(sent.toString());
 			}
@@ -710,6 +712,8 @@ public class SubscriptionSParkingController {
 		stage.setScene(new Scene(root1));  
 		stage.show();
 		stage.setOnCloseRequest(e -> Platform.exit());
+       	Stage curr = (Stage)back_order_button.getScene().getWindow();
+		curr.close();
 	}
 
 }

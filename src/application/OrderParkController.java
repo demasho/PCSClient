@@ -42,7 +42,8 @@ public class OrderParkController {
     	Stage stage = new Stage();
     	stage.setScene(new Scene(root1));  
     	stage.show();
-
+       	Stage curr = (Stage)casualButton.getScene().getWindow();
+    	curr.close();
     }
 
     @FXML
@@ -51,7 +52,9 @@ public class OrderParkController {
     	BorderPane root1 = fxmlLoader.load();
     	Stage stage = new Stage();
     	stage.setScene(new Scene(root1));  
-    	stage.show();
+    	stage.show();    	
+		Stage curr = (Stage)oneTimeButton.getScene().getWindow();
+		curr.close();
 
     }
 
@@ -62,7 +65,8 @@ public class OrderParkController {
     	Stage stage = new Stage();
     	stage.setScene(new Scene(root1));  
     	stage.show();
-
+    	Stage curr = (Stage)subscriptionButton.getScene().getWindow();
+		curr.close();
     }
     
     @FXML
@@ -71,7 +75,9 @@ public class OrderParkController {
     	BorderPane root1 = fxmlLoader.load();
     	Stage stage = new Stage();
     	stage.setScene(new Scene(root1));  
-    	stage.show();
+    	stage.show();  	
+       	Stage curr = (Stage)subscriptionSButton.getScene().getWindow();
+    	curr.close();
 
     }
 

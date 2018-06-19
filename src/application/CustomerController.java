@@ -56,10 +56,7 @@ public class CustomerController {
     	Stage stage = new Stage();
     	stage.setScene(new Scene(root1));  
     	stage.show();    	
-    	stage.setOnCloseRequest(e -> Platform.exit());
-
-
-	    
+    	stage.setOnCloseRequest(e -> Platform.exit());   
     }
 
     @FXML
@@ -69,12 +66,9 @@ public class CustomerController {
     	Stage stage = new Stage();
     	stage.setScene(new Scene(root1));  
     	stage.show();
-    	stage.setOnCloseRequest(e -> Platform.exit());
-    	
-
+    	stage.setOnCloseRequest(e -> Platform.exit()); 	
     }
     
-
     @FXML
     void PayButtonClick(MouseEvent event) throws IOException {
     	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PayScene.fxml"));
@@ -85,11 +79,9 @@ public class CustomerController {
     	stage.setOnCloseRequest(e -> Platform.exit());
     }
     @FXML
-    void ShowPricesClick(MouseEvent event) throws IOException{
-    	
+    void ShowPricesClick(MouseEvent event) throws IOException{ 	
     	PriceTable prices = new PriceTable();
-    	prices.start(new Stage());
-    	
+    	prices.start(new Stage());   	
     }
 
 }
