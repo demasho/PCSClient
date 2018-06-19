@@ -26,6 +26,8 @@ public class ClientConsole implements ChatIF
   /**
    * The default port to connect on.
    */
+ public static boolean Done = false; 
+ public static String Result;
   final public static int DEFAULT_PORT = 5555;
   
   //Instance variables **********************************************
@@ -70,28 +72,12 @@ public class ClientConsole implements ChatIF
    * This method waits for input from the console.  Once it is 
    * received, it sends it to the client's message handler.
    */
-  public void accept() 
+  public void sendRequest(String Msg) 
   {
     try
     {
-      BufferedReader fromConsole = 
-        new BufferedReader(new InputStreamReader(System.in));
-      String message;  
-      String Action;
-      while (true) 
-      {
-          System.out.println("Hello .. If you want to Login please enter Login if you want to sign up please enter Sign");
-          Action = fromConsole.readLine();
-          if(Action.equals("Login"))
-    	    {
-        	  System.out.println("please enter in this format (separated only by one space) : <username>   <password>");
-    	    }
-    	    if(Action.equals("Sign")) {
-    	      System.out.println("please enter in this format (separated only by one space) : <username>  <Age>  <e-mail>  <phoneNumber>  <password>");
-    	    } 
-    	message = fromConsole.readLine();
-        client.handleMessageFromClientUI(Action+" : "+message);
-      }
+        client.handleMessageFromClientUI(Msg);
+      
     } 
     catch (Exception ex) 
     {
@@ -115,7 +101,9 @@ public class ClientConsole implements ChatIF
    */
   public void display(String message) 
   {
-    System.out.println("> " + message);
+   this.Done=true;
+   this.Result=message;
+   System.out.println(message);
   }
   
   

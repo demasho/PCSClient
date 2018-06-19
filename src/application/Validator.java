@@ -91,7 +91,7 @@ public class Validator {
 		return true;
 	}
 	/************* help function *******************/
-	private static boolean isNum(String str)
+	public static boolean isNum(String str)
 	{
 		boolean numeric = true;
 		try {

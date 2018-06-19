@@ -12,7 +12,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
@@ -55,9 +57,8 @@ public class OneTimeParkingController {
 
 	@FXML
 	private TextField end_hour_field;
-	
-	private ClientConsole console = ClientConsole.getInstance();
-	private ChatClient client=console.getClient();
+
+	private ClientConsole client = ClientConsole.getInstance();
 
 	@FXML
 	void NextOrderAction(ActionEvent event) {
@@ -83,7 +84,7 @@ public class OneTimeParkingController {
 		end_minute_field.setStyle("-fx-text-inner-color: black;");
 		start_hour_text.setStyle("-fx-text-inner-color: black;");
 		start_minute_text.setStyle("-fx-text-inner-color: black;");
-		//////////
+		////////////<CUSTOMER_ID> <PARKING_ID>  <ENTRY_DATE> <RELEASE_DATE> <E_MAIL> <CAR_NUMBER>
 		try
 		{
 			person_id=person_id_text.getText().trim();
@@ -97,17 +98,6 @@ public class OneTimeParkingController {
 		}
 
 		try {
-			car_id=car_id_text.getText().trim();
-			if( Validator.isValidCarNumber(car_id)==false)
-				throw new Exception();
-			sent.append(car_id+" ");
-		}catch(Exception e){
-			car_id_text.setText("invalid input");
-			car_id_text.setStyle("-fx-text-inner-color: red;");
-			flag=false;
-		}
-
-		try {
 			park_id=park_id_text.getText().trim();
 			if(!Validator.isValidRequestedPark(park_id))
 				throw new Exception();
@@ -115,20 +105,6 @@ public class OneTimeParkingController {
 		}catch(Exception e) {
 			park_id_text.setText("invalid input");
 			park_id_text.setStyle("-fx-text-inner-color: red;");
-			flag=false;
-		}
-
-		try {
-			email=email_field.getText().trim();
-			if(!Validator.isValidEmailAddress(email))
-			{
-				throw new Exception();
-
-			}
-			sent.append(email+" ");
-		}catch(Exception e){
-			email_field.setText("invalid input");
-			email_field.setStyle("-fx-text-inner-color: red;");
 			flag=false;
 		}
 		try {
@@ -139,7 +115,7 @@ public class OneTimeParkingController {
 				if(!Validator.isValidEndTime(start_time_minute, start_time_hour))
 					throw new Exception();
 				sent.append(startlocalDate);
-				sent.append("/"+start_time_hour + ":" + start_time_minute + " ");
+				sent.append("/"+start_time_hour + ":" + start_time_minute + ":00 ");
 			}catch(Exception e){
 				start_hour_text.setText("invalid input");
 				start_hour_text.setStyle("-fx-text-inner-color: red;");
@@ -154,7 +130,7 @@ public class OneTimeParkingController {
 				if(!Validator.isValidEndTime(end_time_minute, end_time_hour))
 					throw new Exception();
 				sent.append(endlocalDate);
-				sent.append("/"+end_time_hour + ":" + end_time_minute + " ");
+				sent.append("/"+end_time_hour + ":" + end_time_minute + ":00 ");
 			}catch(Exception e){
 				end_hour_field.setText("invalid input");
 				end_hour_field.setStyle("-fx-text-inner-color: red;");
@@ -162,22 +138,54 @@ public class OneTimeParkingController {
 				end_minute_field.setStyle("-fx-text-inner-color: red;");
 				flag=false;
 			}
-		//	if(!Validator.isValidDates(startlocalDate.toString(), endlocalDate.toString()))
-			//{
-				//throw new Exception();
+			try {
+				email=email_field.getText().trim();
+				if(!Validator.isValidEmailAddress(email))
+				{
+					throw new Exception();
 
-			//}
+				}
+				sent.append(email+" ");
+			}catch(Exception e){
+				email_field.setText("invalid input");
+				email_field.setStyle("-fx-text-inner-color: red;");
+				flag=false;
+			}
 			System.out.println("Here: " + sent);
 
+			try {
+				car_id=car_id_text.getText().trim();
+				if( Validator.isValidCarNumber(car_id)==false)
+					throw new Exception();
+				sent.append(car_id+" ");
+			}catch(Exception e){
+				car_id_text.setText("invalid input");
+				car_id_text.setStyle("-fx-text-inner-color: red;");
+				flag=false;
+			}
 		}catch(Exception e)
 		{
 
 		}
-		
+
 		if(flag==true)
 		{
-			AlertBox.display("Loading", "Loading .....", "Please Wait");
-			client.handleMessageFromClientUI(sent.toString());
+			client.sendRequest(sent.toString());
+			javafx.scene.control.Alert mylert = new Alert(Alert.AlertType.INFORMATION," Operation in Progress");
+			mylert.getButtonTypes().clear();
+			mylert.setResizable(true);
+			mylert.getDialogPane().setPrefSize(480, 170);
+			mylert.show();
+			
+			while(client.Done==false)
+			{
+				if(client.Done==true)
+					break;
+			}
+			client.Done=false;
+			mylert.getButtonTypes().add(ButtonType.OK);
+			mylert.setContentText(client.Result);
+			mylert.show();
 		}	
 		else
 			AlertBox.display("הזמנת חניה", "הנתונים שגויים", "נא לעדכן את הנתונים");	

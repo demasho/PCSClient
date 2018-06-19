@@ -4,7 +4,9 @@ import client.ChatClient;
 import client.ClientConsole;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -17,8 +19,7 @@ public class CancelOrderController {
 	@FXML
 	private Button cancelButton;
 
-	private ClientConsole console = ClientConsole.getInstance();
-	private ChatClient client=console.getClient();
+	private ClientConsole client = ClientConsole.getInstance();
 
 	@FXML
 	void CancelButtonAction(ActionEvent event) {
@@ -27,10 +28,23 @@ public class CancelOrderController {
 		sent.append("CANCEL_RESERVATION : ");
 		order=order_id.getText().trim();
 		sent.append(order);
-		AlertBox.display("ביטול חניה", "נא לחכות", "העניין בטיפול");
-		client.handleMessageFromClientUI(sent.toString());
-		AlertBox.display("ביטול חניה", "הביטול התבצע בהצלחה", "תודה ולהתראות");
        	Stage curr = (Stage)cancelButton.getScene().getWindow();
 		curr.close();
+		client.sendRequest(sent.toString());
+		javafx.scene.control.Alert mylert = new Alert(Alert.AlertType.INFORMATION," Operation in Progress");
+		mylert.getButtonTypes().clear();
+		mylert.setResizable(true);
+		mylert.getDialogPane().setPrefSize(480, 170);
+		mylert.show();
+		
+		while(client.Done==false)
+		{
+			if(client.Done==true)
+				break;
+		}
+		client.Done=false;
+		mylert.getButtonTypes().add(ButtonType.OK);
+		mylert.setContentText(client.Result+" $");
+		mylert.show();
 	}
 }
