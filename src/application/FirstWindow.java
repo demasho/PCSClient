@@ -22,9 +22,10 @@ import javafx.stage.Stage;
 
 public class FirstWindow extends Application {
 
+	private static boolean customer = false;
 	@Override
 	public void start(Stage primaryStage) {
-		primaryStage.setTitle("çìåï øàùé");
+		primaryStage.setTitle("Main Window");
 		 GridPane grid = new GridPane();
 		 grid.setStyle("-fx-background-color: #336DFF;");
 		 grid.setAlignment(Pos.CENTER);
@@ -34,13 +35,13 @@ public class FirstWindow extends Application {
 		 
 		 
 		 
-		 Button clientBtn = new Button("ì÷åç");
+		 Button clientBtn = new Button("×œ×§×•×—");
 		 HBox hbBtn = new HBox(10);
 		 hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
 		 hbBtn.getChildren().add(clientBtn);
 		 grid.add(hbBtn, 7, 2);
 		 
-		 Button userBtn = new Button("îùúîù îòøëú");
+		 Button userBtn = new Button("×ž×©×ª×ž×© ×ž×¢×¨×›×ª");
 		 HBox hbBtn1 = new HBox(10);
 		 hbBtn1.setAlignment(Pos.BOTTOM_RIGHT);
 		 hbBtn1.getChildren().add(userBtn);
@@ -50,6 +51,7 @@ public class FirstWindow extends Application {
 			
 			@Override
 			public void handle(ActionEvent arg0) {
+				customer=true;
 				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("CustomerScene.fxml"));
 		    	GridPane root1 = null;
 				try {
@@ -69,8 +71,10 @@ public class FirstWindow extends Application {
 		 userBtn.setOnAction(new EventHandler<ActionEvent>() {
 			 @Override
 			public void handle(ActionEvent event) {
+				customer = false;
 				Login login = new Login();
 				login.start(new Stage());
+				
 			}
 		});
 		 
@@ -79,6 +83,11 @@ public class FirstWindow extends Application {
 		 Scene scene = new Scene(grid, 300, 275);
 		 primaryStage.setScene(scene);
 	        primaryStage.show();
+	}
+	
+	public static boolean isCustomer()
+	{
+		return customer;
 	}
 
 	public static void main(String[] args) {

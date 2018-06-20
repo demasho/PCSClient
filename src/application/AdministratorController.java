@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class AdministratorController {
 
@@ -47,7 +48,8 @@ public class AdministratorController {
 
     @FXML
     void changePricesAction(ActionEvent event) {
-
+    	PriceTable prices = new PriceTable();
+    	prices.start(new Stage());
     }
 
     @FXML

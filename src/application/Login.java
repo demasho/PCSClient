@@ -1,7 +1,5 @@
 package application;
 	
-
-
 import java.io.IOException;
 
 import javafx.application.Application;
@@ -12,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -45,7 +44,7 @@ public class Login extends Application {
 	 }
 	@Override
 	public void start(Stage primaryStage) {
-		 primaryStage.setTitle("äúçáøåú");
+		 primaryStage.setTitle("×”×ª×—×‘×¨×•×ª");
 		 GridPane grid = new GridPane();
 		 grid.setStyle("-fx-background-color: #336DFF;");
 		 grid.setAlignment(Pos.CENTER);
@@ -53,19 +52,19 @@ public class Login extends Application {
 		 grid.setVgap(10);
 		 grid.setPadding(new Insets(25, 25, 25, 25));
 		 
-		 Text scenetitle = new Text("äúçáøåú");
+		 Text scenetitle = new Text("×”×ª×—×‘×¨×•×ª");
 		 scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
 		 grid.add(scenetitle, 0, 0, 2, 1);
 		
 
-		 Label userName = new Label("ùí îùúîù:");
+		 Label userName = new Label("×©× ×ž×©×ª×ž×©:");
 		 grid.add(userName, 1, 1);
 
 		 TextField userTextField = new TextField();
 		 grid.add(userTextField, 0, 1);
 		 
 
-		 Label pw = new Label("ñéñîà:");
+		 Label pw = new Label("×¡×™×¡×ž×:");
 		 grid.add(pw, 1, 2);
 		
 
@@ -73,13 +72,13 @@ public class Login extends Application {
 		 grid.add(pwBox, 0, 2);
 		 
 		 
-		 Button signInBtn = new Button("äúçáø");
+		 Button signInBtn = new Button("×”×ª×—×‘×¨");
 		 HBox hbBtn = new HBox(10);
 		 hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
 		 hbBtn.getChildren().add(signInBtn);
 		 grid.add(hbBtn, 1, 4);
 		 
-		 Button signUpBtn = new Button("äøùîä");
+		 Button signUpBtn = new Button("×”×¨×©×ž×”");
 		 HBox hb1Btn = new HBox(10);
 		 hb1Btn.setAlignment(Pos.BOTTOM_LEFT);
 		 hb1Btn.getChildren().add(signUpBtn);
@@ -102,22 +101,23 @@ public class Login extends Application {
 	           	 	{
 	           	 	 actiontarget.setText("please enter username.. ");
 	           	 	 signInString  = "missing data";
+	           	 	 AlertBox.display("please enter username.. ");
 	           	 	}
 	           	 	
 	           	 	else if(password.isEmpty())
 	           	 	{
 	           	 	actiontarget.setText("please enter password.. ");
 	           	 	signInString  = "missing data";
+	           	 	AlertBox.display("please enter password.. ");
 	           	 	
 	           	 	}
 	           	 	 
 	           	 	else {
 	           	 	signInString = "Signin: " + username + " " + password;
-	           	 	}
 	           	 	if(isValidUser())
 	           	 	{
 	           	 		try {
-							loadAdmin();
+	           	 		loadChainManager();
 						} catch (IOException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
@@ -128,6 +128,8 @@ public class Login extends Application {
 	           	 	else {
 	           	 	actiontarget.setText("Login failed: user does not exist ");
 	           	 	}
+	           	 	}
+	           	 	
 	           	 	
 	           	 	System.out.println(signInString);
 	          //      System.out.println(username);
@@ -152,6 +154,33 @@ public class Login extends Application {
 	public void loadAdmin() throws IOException
 	{
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AdministratorScene.fxml"));
+    	BorderPane root1= fxmlLoader.load();
+    	Stage stage = new Stage();
+    	stage.setScene(new Scene(root1));  
+    	stage.show();    	
+    	stage.setOnCloseRequest(e -> Platform.exit());
+	}
+	public void loadChainManager() throws IOException
+	{
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ChainManager.fxml"));
+    	BorderPane root1= fxmlLoader.load();
+    	Stage stage = new Stage();
+    	stage.setScene(new Scene(root1));  
+    	stage.show();    	
+    	stage.setOnCloseRequest(e -> Platform.exit());
+	}
+	public void loadKyoskWorker() throws IOException
+	{
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("KyoskerScene.fxml"));
+    	BorderPane root1= fxmlLoader.load();
+    	Stage stage = new Stage();
+    	stage.setScene(new Scene(root1));  
+    	stage.show();    	
+    	stage.setOnCloseRequest(e -> Platform.exit());
+	}
+	public void loadServiceWoker() throws IOException
+	{
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ServiceWorkerScene.fxml"));
     	BorderPane root1= fxmlLoader.load();
     	Stage stage = new Stage();
     	stage.setScene(new Scene(root1));  

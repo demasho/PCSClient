@@ -30,10 +30,7 @@ public class SignUp extends Application {
 		 return signUpString;
 	 }
 	@Override
-	public void start(Stage primaryStage) {
-		
-		
-		
+	public void start(Stage primaryStage) {		
 		primaryStage.setTitle("יצירת משתמש חדש");
 		 GridPane grid = new GridPane();
 		 grid.setStyle("-fx-background-color: #336DFF;");
@@ -112,10 +109,6 @@ public class SignUp extends Application {
 	            public void handle(ActionEvent e) {
 	                actiontarget.setFill(Color.FIREBRICK);
 	                actiontarget.setText("Signing up.. ");
-	                
-	               
-		           	 	
-	                
 	                firstName = fNameTextField.getText();
 	                lastName = lNameTextField.getText();
 	                email  = emailTextField.getText();
@@ -140,16 +133,13 @@ public class SignUp extends Application {
 	                System.out.println(signUpString);
 	                
 	            }
-	        });
-
-
-	    
+	        });    
 		 Scene scene = new Scene(grid, 300, 400);
 		 primaryStage.setScene(scene);
 	        primaryStage.show();
 	}
 	
-	public static void main(String[] args) {
-		launch(args);
-	}
+//	public static void main(String[] args) {
+//		launch(args);
+//	}
 }

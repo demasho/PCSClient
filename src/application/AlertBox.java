@@ -17,5 +17,11 @@ public class AlertBox {
 		alert.showAndWait();   		  
 	}
 
+	public static void display(String message)
+	{
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setContentText(message);
+		alert.showAndWait();   		  
+	}
 
 }
