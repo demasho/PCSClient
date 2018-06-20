@@ -14,8 +14,6 @@ public class CancelOrderController {
 
 	@FXML
 	private TextField order_id;
-
-
 	@FXML
 	private Button cancelButton;
 
@@ -35,8 +33,7 @@ public class CancelOrderController {
 		mylert.getButtonTypes().clear();
 		mylert.setResizable(true);
 		mylert.getDialogPane().setPrefSize(480, 170);
-		mylert.show();
-		
+		mylert.show();	
 		while(client.Done==false)
 		{
 			if(client.Done==true)
