@@ -126,14 +126,15 @@ public class Login extends Application {
 						String msg=client.Result;
 						String role = msg.substring(msg.indexOf(":")+2, msg.length());
 						try {
-							if(role.equals("Kiosk_Worker"))
+							if(role.contains("Kiosk_Worker"))
 								loadKyoskWorker();
-							if(role.equals("Service_Worker"))
+							if(role.contains("Service_Worker"))
 								loadServiceWoker();
-							if(role.equals("Network_Manager"))
+							if(role.contains("Network_Manager"))
 								loadChainManager();
-							if(role.equals("Parking_Manager"))
+							if(role.contains("Parking_Manager"))
 								loadAdmin();
+							
 						}
 						catch(Exception f){}
 					}
@@ -142,11 +143,6 @@ public class Login extends Application {
 						mylert.show();
 					}
 				}
-
-
-				System.out.println(signInString);
-				//      System.out.println(username);
-				//      System.out.println(password);
 			}
 		});
 
