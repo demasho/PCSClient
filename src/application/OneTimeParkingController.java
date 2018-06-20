@@ -176,7 +176,7 @@ public class OneTimeParkingController {
 			mylert.setResizable(true);
 			mylert.getDialogPane().setPrefSize(480, 170);
 			mylert.show();
-			
+		
 			while(client.Done==false)
 			{
 				if(client.Done==true)

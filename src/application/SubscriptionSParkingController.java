@@ -1,6 +1,10 @@
 package application;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.chrono.ChronoLocalDate;
+import java.util.Date;
 
 import client.ChatClient;
 import client.ClientConsole;
@@ -101,20 +105,11 @@ public class SubscriptionSParkingController {
 		}
 
 		try {
-			//if(!Validator.isValidArrivalDate(start_date);
-			//throw new Exception();
-			String month="" ;
-			String day="" ;
-			if(start_date_field.getValue().getMonthValue() <= 9)
-				month = "0"+Integer.toString(start_date_field.getValue().getMonthValue());
-			else 
-				month = Integer.toString(start_date_field.getValue().getMonthValue()) ;
-			if(start_date_field.getValue().getDayOfMonth() <= 9)
-				day=("0"+start_date_field.getValue().getDayOfMonth());
-			else 
-				day=Integer.toString(start_date_field.getValue().getDayOfMonth());
-			sent.append(start_date_field.getValue().getYear() + "-" + month 
-					+ "-" + day + "/00:00:00 ");
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd/HH:mm:ss");
+			String startDate = format.format(start_date_field.getValue());		
+			if(start_date_field.getValue().isBefore(LocalDate.now()))
+				throw new Exception();			
+			sent.append(startDate+" ");
 		}catch(Exception e){
 			//start_date_field.setText("invalid input");
 			start_date_field.setStyle("-fx-text-inner-color: red;");

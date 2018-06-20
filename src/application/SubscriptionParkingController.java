@@ -5,6 +5,8 @@ import javafx.event.ActionEvent;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 
 import client.ChatClient;
 import client.ClientConsole;
@@ -69,9 +71,11 @@ public class SubscriptionParkingController {
 		try {
 			//if(!Validator.isValidArrivalDate(start_date);
 				//throw new Exception();
-			sent.append(start_date_field.getValue().getYear() + "-"
-				+ start_date_field.getValue().getMonthValue() + "-"
-					+ start_date_field.getValue().getDayOfMonth() + "/00:00:00 ");
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd/HH:mm:ss");
+			String startDate = format.format(start_date_field.getValue());		
+			if(start_date_field.getValue().isBefore(LocalDate.now()))
+				throw new Exception();			
+			sent.append(startDate+" ");
 		}catch(Exception e){
 			//start_date_field.setText("invalid input");
 			start_date_field.setStyle("-fx-text-inner-color: red;");

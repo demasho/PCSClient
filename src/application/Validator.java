@@ -46,56 +46,46 @@ public class Validator {
 	}
 	public static boolean isValidArrivalTime(String minute , String hour)
 	{
-		if(!isNum(minute) || !isNum(hour)) return false;
+		if(!isNum(minute) || !isNum(hour) || minute.length()!=2 || hour.length()!=2 )
+			return false;
 		
 		arrivalMin = Integer.parseInt(minute);
 		arrivalHr =  Integer.parseInt(hour);
 		
-		if(arrivalMin > 59 || arrivalMin < 0 || arrivalHr > 24 || arrivalHr<0 ) return false;
-		
-		
+		if(arrivalMin > 59 || arrivalMin < 0 || arrivalHr > 24 || arrivalHr<0 )
+			return false;		
 		return true;
 	}
 	
 	public static boolean isValidEndTime(String minute , String hour)
 	{
-		if(!isNum(minute) || !isNum(hour)) return false;
+		if(!isNum(minute) || !isNum(hour) || minute.length()!=2 || hour.length()!=2 )
+			return false;
 		
 		finishMin = Integer.parseInt(minute);
 		finishHr =  Integer.parseInt(hour);
 		
 		if(finishMin > 59 || finishMin < 0 || finishHr > 24 || finishHr<0 ) return false;
 		
-		return true; 
-		
+		return true; 		
 	}
 	
 	public static boolean isValidDates(Calendar beginDate  , Calendar endDate)
 	{
 		Calendar currentTime = Calendar.getInstance();
 		
-		if(beginDate.compareTo(currentTime)<0)
-		{
-			return false;
-		}
-		if( beginDate.compareTo(endDate) > 0) 
-		{
-			return false;
-		}
-		if( beginDate.compareTo(endDate) == 0) 
-		{
-			if(finishHr < arrivalHr || (finishHr == arrivalHr && finishMin<arrivalMin)) return false; 
-			
-		}
-		
-		return true;
+		if(beginDate.getTime().before(currentTime.getTime()) || endDate.getTime().before(beginDate.getTime())
+				|| beginDate.getTime().equals(endDate.getTime()))
+			return false ;
+		return true ;
 	}
+	
 	/************* help function *******************/
 	public static boolean isNum(String str)
 	{
 		boolean numeric = true;
 		try {
-			Double num = Double.parseDouble(str);
+			Double.parseDouble(str);
 		} catch (NumberFormatException e) {
 			numeric = false;
 		}

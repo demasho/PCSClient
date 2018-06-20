@@ -73,8 +73,6 @@ public class CasualParkingController extends Main {
 		try
 		{
 			park_id=park_id_text.getText().trim();
-			//if( Validator.isValid(park_id)==false )
-				//throw new Exception();
 			sent.append(park_id + " ");
 		}catch (Exception e) {
 			person_id_text.setText("invalid input;");
@@ -83,7 +81,6 @@ public class CasualParkingController extends Main {
 		}
 		
 		try {
-
 			end_minute =end_minute_field.getText().trim();
 			end_hour =end_hour_field.getText().trim();
 			if(!Validator.isValidEndTime(end_minute, end_hour))
