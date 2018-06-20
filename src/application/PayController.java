@@ -24,7 +24,8 @@ public class PayController {
 
 	@FXML
 	private TextField order_id_text;
-	private TextField card;
+	@FXML
+	private TextField creditnumber;
 	@FXML
 	private Button next_order_button;
 
@@ -81,25 +82,28 @@ public class PayController {
 	@FXML
 	void pay(ActionEvent event) {
 		StringBuilder sent=new StringBuilder();
-//		if(card.getText().isEmpty()==false|| card.getText().length()< 10 || Validator.isNum(card.getText())==false) {
-		sent.append("PAY_ANDOUT : ");
-		sent.append(order);
-		client.sendRequest(sent.toString());
-		while(client.Done==false)
-		{
-			if(client.Done==true)
-				break;
-		}
-		client.Done=false;
 		javafx.scene.control.Alert mylert = new Alert(Alert.AlertType.INFORMATION," Operation in Progress");
-		mylert.getButtonTypes().add(ButtonType.OK);
-		mylert.setContentText(client.Result);
-		mylert.show();
-//		}
-//		else {
-//			javafx.scene.control.Alert mylert = new Alert(Alert.AlertType.ERROR," your cradit card number in wrong ! ");
-//			mylert.show();
-//		}
+		if(creditnumber.getText().isEmpty()==false&& creditnumber.getText().length()> 10 && Validator.isNum(creditnumber.getText())==true) {
+			sent.append("PAY_ANDOUT : ");
+			sent.append(order);
+			client.sendRequest(sent.toString());
+			mylert.setResizable(true);
+			mylert.getDialogPane().setPrefSize(480, 170);
+			mylert.show();
+			while(client.Done==false)
+			{
+				if(client.Done==true)
+					break;
+			}
+			client.Done=false;
+			mylert.close();
+			mylert.setContentText(client.Result);
+			mylert.show();
+		}
+		else {
+			mylert.setContentText("your credit card number WRONG!");
+			mylert.show();
+		}
 	}
 
 	@FXML
