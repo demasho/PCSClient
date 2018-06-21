@@ -28,6 +28,7 @@ public class ClientConsole implements ChatIF
    */
  public static boolean Done = false; 
  public static String Result;
+ public static String ParkingID;
   final public static int DEFAULT_PORT = 5555;
   
   //Instance variables **********************************************
@@ -103,7 +104,7 @@ public class ClientConsole implements ChatIF
   {
    this.Done=true;
    this.Result=message;
-   System.out.println(message);
+  // System.out.println(message);
   }
   
   

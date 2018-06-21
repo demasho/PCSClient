@@ -1,65 +1,69 @@
 package application;
 
-import javafx.event.ActionEvent;
 
+import javafx.scene.control.TextField;
+import client.ClientConsole;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
+import javafx.scene.control.ButtonType;
 
 public class AdministratorController {
 
-    @FXML
-    private Text firstname_text;
+	@FXML
+	private TextField parkingcasualorder;
 
-    @FXML
-    private Button reportsButton;
+	@FXML
+	private TextField Rsubs;
 
-    @FXML
-    private Button changePricesButton;
+	@FXML
+	private TextField Bsubs;
 
-    @FXML
-    private Button reportsAnswersButton;
+	@FXML
+	private TextField onetimeorder;
 
-    @FXML
-    private Text casual_price_text;
+	@FXML
+	private Button changePricesButton;
 
-    @FXML
-    private Text on_time_park_price;
+	private ClientConsole client = ClientConsole.getInstance();
 
-    @FXML
-    private Text subscription_price_text;
+	@FXML
+	void changePricesAction(ActionEvent event) {
+		StringBuilder sent = new StringBuilder();
+		String bsubs = Bsubs.getText().trim();
+		String rsubs = Rsubs.getText().trim();
+		String oneorder = onetimeorder.getText().trim();
+		String porder = parkingcasualorder.getText().trim();
 
-    @FXML
-    void CasualButtonClick(MouseEvent event) {
+		sent.append("UPDATING_PRICES : ");
+		if(bsubs.isEmpty()==true || rsubs.isEmpty()==true || oneorder.isEmpty()==true || porder.isEmpty()==true) {
+			AlertBox.display("missing data");
+		}
+		else {
+			if(Validator.isNum(bsubs)==false || Validator.isNum(rsubs)==false || Validator.isNum(oneorder)==false || Validator.isNum(porder)==false) {
+				AlertBox.display("you entered wrong data");
+			}else {
+				sent.append(oneorder+" ");
+				sent.append(porder+" ");
+				sent.append(rsubs+" ");
+				sent.append(bsubs);
+				client.sendRequest(sent.toString());	
+				while(client.Done==false)
+				{
+					if(client.Done==true)
+						break;
+				}
+				client.Done=false;
+				
+				AlertBox.display(client.Result);
+			}
+		}
+	}
 
-    }
+	@FXML
+	void OneParkingButtonClick(ActionEvent event) {
 
-    @FXML
-    void OneParkingButtonClick(MouseEvent event) {
-
-    }
-
-    @FXML
-    void SubscriptionButtonClick(MouseEvent event) {
-
-    }
-
-    @FXML
-    void changePricesAction(ActionEvent event) {
-    	PriceTable prices = new PriceTable();
-    	prices.start(new Stage());
-    }
-
-    @FXML
-    void reportsAction(ActionEvent event) {
-//    	getBackToOperations(event);
-    }
-
-    @FXML
-    void reportsAnswersAction(ActionEvent event) {
-
-    }
+	}
 
 }
