@@ -19,7 +19,7 @@ import client.*;
  */
 public class ClientConsole implements ChatIF 
 {
- private static ClientConsole ClientFunc = new ClientConsole("localhost", 5555);
+ private static ClientConsole ClientFunc=null;
  
   //Class variables *************************************************
   
@@ -30,7 +30,8 @@ public class ClientConsole implements ChatIF
  public static String Result;
  public static String ParkingID;
   final public static int DEFAULT_PORT = 5555;
-  
+  public static int  port ;
+  public static String  host;
   //Instance variables **********************************************
   
   /**
@@ -87,6 +88,8 @@ public class ClientConsole implements ChatIF
     }
   }
   public static ClientConsole getInstance() {
+	  if(ClientFunc==null)
+		  ClientFunc=new ClientConsole(host,port);
 		return ClientFunc;
   }
   

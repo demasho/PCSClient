@@ -90,7 +90,7 @@ public class FirstWindow extends Application {
 		return customer;
 	}
 
-	public static void main(String[] args) {
-		launch(args);
-	}
+//	public static void main(String[] args) {
+//		launch(args);
+//	}
 }

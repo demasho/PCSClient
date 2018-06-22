@@ -15,7 +15,9 @@ import client.ObservableClient;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
@@ -53,8 +55,7 @@ public class CasualParkingController extends Main {
 
 	@FXML
 	private TextField email_field;
-	private ClientConsole console = ClientConsole.getInstance();
-	private ChatClient client=console.getClient();
+	private ClientConsole client = ClientConsole.getInstance();
 
 
 	//<PARKING_ID> <ENTRY_DATE> <RELEASE_DATE> <E-MAIL> <CUSTOMER_ID> <CAR_NUMBER>
@@ -149,8 +150,21 @@ public class CasualParkingController extends Main {
 
 		if(flag==true)
 		{
-			AlertBox.display("Loading", "Loading .....", "Please Waitt");
-			client.handleMessageFromClientUI(sent.toString());
+			client.sendRequest(sent.toString());
+			javafx.scene.control.Alert mylert = new Alert(Alert.AlertType.INFORMATION," Operation in Progress");
+			mylert.getButtonTypes().clear();
+			mylert.setResizable(true);
+			mylert.getDialogPane().setPrefSize(480, 170);
+			mylert.show();	
+			while(client.Done==false)
+			{
+				if(client.Done==true)
+					break;
+			}
+			mylert.getButtonTypes().add(ButtonType.OK);
+			mylert.setContentText(client.Result);
+			client.Done=false;
+			mylert.show();
 		}
 		else
 			AlertBox.display("הזמנת חניה", "הנתונים שגויים", "נא לעדכן את הנתונים");
@@ -171,24 +185,24 @@ public class CasualParkingController extends Main {
 	@FXML
 	void showAvailableAction(ActionEvent event) {
 		String Get = "GET_AVAILABLE_PARKINGS :" ;
-		console.sendRequest(Get);
+		client.sendRequest(Get);
 		while(true)
 		{
 			System.out.println("while");
-			if(console.Done==true)
+			if(client.Done==true)
 				break;
 		}
-		System.out.println(console.Result);
-		if(console.Result.contains("Failed")== false)
+		System.out.println(client.Result);
+		if(client.Result.contains("Failed")== false)
 		{
-			String res=console.Result.replace(' ', '\n');
+			String res=client.Result.replace(' ', '\n');
 			viewAvailableTxt.setText(res);	
 		}
 		else
 		{
-			AlertBox.display(console.Result);
+			AlertBox.display(client.Result);
 		}
-		console.Done=false;	
+		client.Done=false;	
 	}
 
 }

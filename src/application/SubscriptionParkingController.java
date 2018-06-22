@@ -14,7 +14,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
@@ -22,34 +24,33 @@ import javafx.stage.Stage;
 
 public class SubscriptionParkingController {
 
-    @FXML
-    private TextField car_id_text;
+	@FXML
+	private TextField car_id_text;
 
-    @FXML
-    private TextField person_id_text;
+	@FXML
+	private TextField person_id_text;
 
-    @FXML
-    private Button next_order_button;
-    
-    @FXML
-    private DatePicker start_date_field;
+	@FXML
+	private Button next_order_button;
 
-    @FXML
-    private Button back_order_button;
+	@FXML
+	private DatePicker start_date_field;
 
-    @FXML
-    private TextField email_field;
-    
-	private ClientConsole console = ClientConsole.getInstance();
-	private ChatClient client=console.getClient();
-	
-    boolean flag=true;
-    @FXML
-    void NextOrderAction(ActionEvent event) {
+	@FXML
+	private Button back_order_button;
+
+	@FXML
+	private TextField email_field;
+
+	private ClientConsole client = ClientConsole.getInstance();
+
+	boolean flag=true;
+	@FXML
+	void NextOrderAction(ActionEvent event) {
 		StringBuilder sent=new StringBuilder();
 		StringBuilder start_date=new StringBuilder();
 		sent.append("MonthlySubscription : ");
-    	String person_id = null;
+		String person_id = null;
 		String car_id;
 		String email = null;
 		person_id_text.setStyle("-fx-text-inner-color: black;");
@@ -67,10 +68,10 @@ public class SubscriptionParkingController {
 			person_id_text.setStyle("-fx-text-inner-color: red;");
 			flag=false;
 		}
-		
+
 		try {
 			//if(!Validator.isValidArrivalDate(start_date);
-				//throw new Exception();
+			//throw new Exception();
 			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd/HH:mm:ss");
 			String startDate = format.format(start_date_field.getValue());		
 			if(start_date_field.getValue().isBefore(LocalDate.now()))
@@ -93,9 +94,9 @@ public class SubscriptionParkingController {
 			email_field.setStyle("-fx-text-inner-color: red;");
 			flag=false;
 		}
-		
+
 		sent.append("false 1 , ");
-		
+
 		try {
 			car_id=car_id_text.getText().trim();
 			if( Validator.isValidCarNumber(car_id)==false)
@@ -106,27 +107,40 @@ public class SubscriptionParkingController {
 			car_id_text.setStyle("-fx-text-inner-color: red;");
 			flag=false;
 		}
-		
-		
-			if(flag==true)
-			{
-				AlertBox.display("Loading", "Loading .....", "Please Wait");
-				client.handleMessageFromClientUI(sent.toString());
-			}
-			else
-				AlertBox.display("הזמנת חניה", "הנתונים שגויים", "נא לעדכן את הנתונים");
-    }
 
-    @FXML
-    void back_order_action(ActionEvent event) throws IOException {
-    	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("OrderParkScene.fxml"));
-    	BorderPane root1 = fxmlLoader.load();
-    	Stage stage = new Stage();
-    	stage.setScene(new Scene(root1));  
-    	stage.show();
-    	stage.setOnCloseRequest(e -> Platform.exit());
-       	Stage curr = (Stage)back_order_button.getScene().getWindow();
+
+		if(flag==true)
+		{
+			client.sendRequest(sent.toString());
+			javafx.scene.control.Alert mylert = new Alert(Alert.AlertType.INFORMATION," Operation in Progress");
+			mylert.getButtonTypes().clear();
+			mylert.setResizable(true);
+			mylert.getDialogPane().setPrefSize(480, 170);
+			mylert.show();	
+			while(client.Done==false)
+			{
+				if(client.Done==true)
+					break;
+			}
+			mylert.getButtonTypes().add(ButtonType.OK);
+			mylert.setContentText(client.Result);
+			client.Done=false;
+			mylert.show();
+		}
+		else
+			AlertBox.display("הזמנת חניה", "הנתונים שגויים", "נא לעדכן את הנתונים");
+	}
+
+	@FXML
+	void back_order_action(ActionEvent event) throws IOException {
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("OrderParkScene.fxml"));
+		BorderPane root1 = fxmlLoader.load();
+		Stage stage = new Stage();
+		stage.setScene(new Scene(root1));  
+		stage.show();
+		stage.setOnCloseRequest(e -> Platform.exit());
+		Stage curr = (Stage)back_order_button.getScene().getWindow();
 		curr.close();
-    }
+	}
 
 }
