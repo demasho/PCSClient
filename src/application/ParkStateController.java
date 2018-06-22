@@ -17,73 +17,49 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 public class ParkStateController {
-/*
-	@FXML
-	GridPane gridPane;
-	@FXML
-	Rectangle rec1;
-	@FXML
-	Rectangle rec2;
-	@FXML
-	Rectangle rec3;
-	@FXML
-	Rectangle rec4;
-	@FXML
-	Rectangle rec5;
-	@FXML
-	Rectangle rec6;
-	@FXML
-	Rectangle rec7;
-	@FXML
-	Rectangle rec8;
-	@FXML
-	Rectangle rec9;
-	@FXML
-	Rectangle rec10;
-	@FXML
-	Rectangle rec11;
-	@FXML
-	Rectangle rec12;
-	@FXML
-	Label floorNumLbl; */
 	
 	
-	int max_size=100;
+	public int column_num,availableParks;
 	
-	Floor1Controller floor1;
-	Floor2Controller floor2;
-	Floor3Controller floor3;
+
+	public char mat1[][] = { { 'A', 'A', 'A', 'A' },
+			{ 'A', 'A', 'A', 'A' },
+			{ 'A', 'A', 'A', 'A' } };
+	
+	public char mat2[][] = { { 'A', 'A', 'A', 'A' },
+			{ 'A', 'A', 'A', 'A' },
+			{ 'A', 'A', 'A', 'A' } };
+	
+	public char mat3[][] = { { 'A', 'A', 'A', 'A' },
+			{ 'A', 'A', 'A', 'A' },
+			{ 'A', 'A', 'A', 'A' } };
+	
 	
 	public ParkStateController() {
 		
-		floor1 = new Floor1Controller();
-		floor2 = new Floor2Controller();
-		floor3 = new Floor3Controller();
-		
 	}
 	
 	
-	public void setParkSize(int size)
-	{
-		max_size = size;
-	}
-	// ex. for data : P(x,y,z) P(x,y,z) P(x,y,z) A(x,y,z) A(x,y,z) A(x,y,z) 2
+	// ex. for data : P(x,y,z) P(x,y,z) P(x,y,z) A(x,y,z) A(x,y,z) A(x,y,z) 2 4
 	public  void createPark(String data)
 	{
 		
 		String[] array = data.split("\\ "); 
 		System.out.println(Arrays.toString(array));
 		
-		int availableParks =  Integer.parseInt(array[array.length-1]);
+		column_num =  Integer.parseInt(array[array.length-1]);
+		availableParks =  Integer.parseInt(array[array.length-2]);
 		
-		String[] newArray = new String[array.length-1];
-		newArray=Arrays.copyOf(array,array.length-1);
+		String[] newArray = new String[array.length-2];
+		newArray=Arrays.copyOf(array,array.length-2);
 		
 		char parkState; // P (Parked) , A (Available) , B (Bad)
 		char row,col,floor;
 		
+	//	System.out.println("hakuna matata");
 	//	System.out.println(Arrays.toString(newArray));
 	//	System.out.println(availableParks);
+	//	System.out.println(column_num);
 		
 		for (int i = 0; i < newArray.length; i++)
 		{
@@ -92,78 +68,66 @@ public class ParkStateController {
 			col = (newArray[i]).charAt(4);
 			floor = (newArray[i]).charAt(6);
 			
+			int x = Character.getNumericValue(row);
+			int y = Character.getNumericValue(col);
+			
 			if(floor=='1')
 			{
 				if(parkState=='P')
 				{
-					System.out.println("el3ab yala");
-					int x = Character.getNumericValue(row);
-					int y = Character.getNumericValue(col);
-					System.out.println(x);
-					System.out.println(y);
-					floor1.setParkedplace(Character.getNumericValue(row), Character.getNumericValue(col));	
+					mat1[x][y] = 'P';	
 				}
 					
 				if(parkState=='B')
-					floor1.setdisabledPark(Character.getNumericValue(row), Character.getNumericValue(col));
+				{
+					mat1[x][y] = 'B';
+				}
+				
 				if(parkState=='A')
-					floor1.setAvailable(Character.getNumericValue(row), Character.getNumericValue(col));
+				{
+					mat1[x][y] = 'A';
+				}
 				
 			}
 			if(floor=='2')
 			{
 				if(parkState=='P')
-					floor2.setParkedplace(Character.getNumericValue(row), Character.getNumericValue(col));
+				{
+					mat2[x][y] = 'P';
+				}
+					
 				if(parkState=='B')
-					floor2.setdisabledPark(Character.getNumericValue(row), Character.getNumericValue(col));
+				{
+					mat2[x][y] = 'B';
+				}
+				
 				if(parkState=='A')
-					floor2.setAvailable(Character.getNumericValue(row), Character.getNumericValue(col));
+				{
+					mat2[x][y] = 'A';
+				}
 				
 			}
 			if(floor=='3')
 			{
 				if(parkState=='P')
-					floor3.setParkedplace(Character.getNumericValue(row), Character.getNumericValue(col));
+				{
+					mat3[x][y] = 'P';
+				}
+					
 				if(parkState=='B')
-					floor3.setdisabledPark(Character.getNumericValue(row), Character.getNumericValue(col));
-				if(parkState=='A')
-					floor3.setAvailable(Character.getNumericValue(row), Character.getNumericValue(col));
+				{
+					mat3[x][y] = 'B';
+				}
 				
+				if(parkState=='A')
+				{
+					mat3[x][y] = 'A';
+				}
 			}
 			
 			
 		}
 		
 		
-	}
-	
-	public void loadFloor1() throws IOException
-	{
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Floor1Scene.fxml"));
-		GridPane root1= fxmlLoader.load();
-    	Stage stage = new Stage();
-    	stage.setScene(new Scene(root1));  
-    	stage.show();    	
-    	stage.setOnCloseRequest(e -> Platform.exit());
-	}
-
-	public void loadFloor2() throws IOException
-	{
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Floor2Scene.fxml"));
-		GridPane root1= fxmlLoader.load();
-    	Stage stage = new Stage();
-    	stage.setScene(new Scene(root1));  
-    	stage.show();    	
-    	stage.setOnCloseRequest(e -> Platform.exit());
-	}
-
-	public void loadFloor3() throws IOException
-	{
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Floor3Scene.fxml"));
-		GridPane root1= fxmlLoader.load();
-    	Stage stage = new Stage();
-    	stage.setScene(new Scene(root1));  
-    	stage.show();    	
-    	stage.setOnCloseRequest(e -> Platform.exit());
 	}
 }

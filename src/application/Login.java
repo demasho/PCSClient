@@ -84,76 +84,70 @@ public class Login extends Application {
 		final Text actiontarget = new Text();
 		grid.add(actiontarget, 1, 6);
 
-		signInBtn.setOnAction(new EventHandler<ActionEvent>() {
+	signInBtn.setOnAction(new EventHandler<ActionEvent>() {
+		 @Override
+         public void handle(ActionEvent e) {
+				actiontarget.setFill(Color.FIREBRICK);
+				actiontarget.setText("Signing in.. ");
 
-			@Override
-			public void handle(ActionEvent e) {
-				try {
-					loadServiceWoker();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				username = userTextField.getText();
+				password=pwBox.getText();
+
+				if(username.isEmpty())
+				{
+					actiontarget.setText("please enter username.. ");
+					signInString  = "missing data";
+					AlertBox.display("please enter username.. ");
 				}
-//				actiontarget.setFill(Color.FIREBRICK);
-//				actiontarget.setText("Signing in.. ");
-//
-//				username = userTextField.getText();
-//				password=pwBox.getText();
-//
-//				if(username.isEmpty())
-//				{
-//					actiontarget.setText("please enter username.. ");
-//					signInString  = "missing data";
-//					AlertBox.display("please enter username.. ");
-//				}
-//				else {
-//					if(password.isEmpty())
-//					{
-//						actiontarget.setText("please enter password.. ");
-//						signInString  = "missing data";
-//						AlertBox.display("please enter password.. ");
-//
-//					}
-//					else {
-//						signInString = "Login : " + username + " " + password;
-//						client.sendRequest(signInString);
-//						javafx.scene.control.Alert mylert = new Alert(Alert.AlertType.INFORMATION," Operation in Progress");
-//						mylert.setResizable(true);
-//						mylert.getDialogPane().setPrefSize(480, 170);
-//						mylert.showAndWait();
-//						while(client.Done == false)
-//						{
-//							if(client.Done==true)
-//								break;
-//						}
-//						client.Done=false;
-//						if(client.Result.contains("Success")==true) {
-//							String msg=client.Result;
-//							String sub= msg.substring(msg.indexOf(":")+2, msg.length());
-//							String[] parts=sub.split(" ");
-//							String role =parts[0];
-//							System.out.println(role+"here");
-//							try {
-//								client.ParkingID=parts[1];
-//								loadServiceWoker();
-////								if(role.contains("Kiosk_Worker"))
-////									loadKyoskWorker();
-////								if(role.contains("Service_Worker"))
-////									loadServiceWoker();
-////								if(role.contains("Network_Manager"))
-////									loadChainManager();
-////								if(role.contains("Parking_Manager"))
-////									loadAdmin();
-//							 
-//							}
-//							catch(Exception f){}
-//						}
-//						else {
-//							mylert.setContentText(client.Result);
-//							mylert.show();
-//						}
-//					}
-//				}
+				else {
+					if(password.isEmpty())
+					{
+						actiontarget.setText("please enter password.. ");
+						signInString  = "missing data";
+						AlertBox.display("please enter password.. ");
+
+					}
+					else {
+						signInString = "Login : " + username + " " + password;
+						client.sendRequest(signInString);
+						javafx.scene.control.Alert mylert = new Alert(Alert.AlertType.INFORMATION," Operation in Progress");
+						mylert.setResizable(true);
+						mylert.getDialogPane().setPrefSize(480, 170);
+						mylert.showAndWait();
+						while(client.Done == false)
+						{
+							System.out.println("while");
+							if(client.Done==true)
+								break;
+						}
+						client.Done=false;
+						if(client.Result.contains("Success")==true) {
+							String msg=client.Result;
+							String sub= msg.substring(msg.indexOf(":")+2, msg.length());
+							String[] parts=sub.split(" ");
+							String role =parts[0];
+							System.out.println(role+"here");
+							try {
+								client.ParkingID=parts[1];
+								loadServiceWoker();
+								if(role.contains("Kiosk_Worker"))
+									loadKyoskWorker();
+								if(role.contains("Service_Worker"))
+									loadServiceWoker();
+								if(role.contains("Network_Manager"))
+									loadChainManager();
+								if(role.contains("Parking_Manager"))
+									loadAdmin();
+							 
+							}
+							catch(Exception f){}
+						}
+						else {
+							mylert.setContentText(client.Result);
+							mylert.show();
+						}
+					}
+				}
 				}
 		});
 

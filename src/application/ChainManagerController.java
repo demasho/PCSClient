@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import client.ClientConsole;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -13,7 +14,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -32,6 +35,12 @@ public class ChainManagerController implements Initializable {
 	Button notOk;
 	@FXML
 	Label label;
+	
+	public static int floorNum;
+	int columns;
+	public static String parkAssignment;
+	
+	private ClientConsole client = ClientConsole.getInstance();
 	
 	String selectedChoice ,selectedChoiceFloor ;
 	boolean priceUpdated = false;
@@ -73,19 +82,69 @@ public class ChainManagerController implements Initializable {
 	@FXML
 	void viewParkClick(ActionEvent ae)
 	{
-		System.out.println(selectedChoice);
-		System.out.println(selectedChoiceFloor);
-		try {
-			if(selectedChoiceFloor=="1")
-				loadFloor1();
-			if(selectedChoiceFloor=="2")
-				loadFloor2();
-			if(selectedChoiceFloor=="3")
-				loadFloor3();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(selectedChoice==null || selectedChoiceFloor==null)
+		{
+			AlertBox.display("please select park and floor");
 		}
+		else {
+			parkAssignment = "P(0,0,1) P(1,1,1) P(0,0,2) B(1,3,2) P(0,0,3) B(0,1,3) 2 5";
+			System.out.println(selectedChoice);
+			System.out.println(selectedChoiceFloor);
+			
+			/************ connect with server *****************/
+			String request = "PARKING_SNAPSHOT : 333";
+			System.out.println("i have the tools");
+			System.out.println(request);
+			client.sendRequest(request.toString());
+				
+			while(client.Done==false)
+			{
+				if(client.Done==true)
+					break;
+			}
+			client.Done=false;
+			
+			 System.out.println("client result");
+			 System.out.println(client.Result);
+			
+			if(client.Result.contains("failed"))
+			{
+				System.out.println("failed miserably");
+				
+			}
+			else {
+				parkAssignment = client.Result;
+			} 
+			
+			columns = Character.getNumericValue( parkAssignment.charAt(parkAssignment.length()-1));
+		//	ParkStateController ps = new ParkStateController();
+		//	ps.createPark("P(0,0,1) P(1,1,1) P(0,0,2) A(1,1,2) A(0,0,3) A(1,1,3) 2");
+			
+			try {
+				if(selectedChoiceFloor=="1")
+				{
+					floorNum=1;
+					loadFloor(columns);
+				}
+					
+				if(selectedChoiceFloor=="2")
+				{
+					floorNum=2;
+					loadFloor(columns);
+				}
+					
+				if(selectedChoiceFloor=="3")
+				{
+					floorNum=3;
+					loadFloor(columns);
+				}
+					
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 	}
 	@FXML
 	void OkAction(ActionEvent ae)
@@ -104,9 +163,19 @@ public class ChainManagerController implements Initializable {
 	}
 	
 	
-	public void loadFloor1() throws IOException
+	public void loadFloor(int numberOfCol) throws IOException
 	{
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Floor1Scene.fxml"));
+		FXMLLoader fxmlLoader = null;
+		if(numberOfCol==4)
+			fxmlLoader = new FXMLLoader(getClass().getResource("FloorScene4.fxml"));
+		if(numberOfCol==5)
+			fxmlLoader = new FXMLLoader(getClass().getResource("FloorScene5.fxml"));
+		if(numberOfCol==6)
+			fxmlLoader = new FXMLLoader(getClass().getResource("FloorScene6.fxml"));
+		if(numberOfCol==7)
+			fxmlLoader = new FXMLLoader(getClass().getResource("FloorScene7.fxml"));
+		if(numberOfCol==8)
+			fxmlLoader = new FXMLLoader(getClass().getResource("FloorScene8.fxml"));
 		GridPane root1= fxmlLoader.load();
     	Stage stage = new Stage();
     	stage.setScene(new Scene(root1));  
@@ -114,6 +183,7 @@ public class ChainManagerController implements Initializable {
     	stage.setOnCloseRequest(e -> Platform.exit());
 	}
 
+	/*
 	public void loadFloor2() throws IOException
 	{
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Floor2Scene.fxml"));
@@ -133,4 +203,5 @@ public class ChainManagerController implements Initializable {
     	stage.show();    	
     	stage.setOnCloseRequest(e -> Platform.exit());
 	}
+	*/
 }

@@ -8,12 +8,13 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.shape.Rectangle?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Floor3Controller">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FloorController">
   <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
   </columnConstraints>
   <rowConstraints>
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -29,25 +30,28 @@
       <Separator prefWidth="600.0" GridPane.columnSpan="4" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
       <Label text="קומה מספר" GridPane.columnIndex="1">
          <GridPane.margin>
-            <Insets left="90.0" />
+            <Insets left="60.0" />
          </GridPane.margin>
       </Label>
-      <Label fx:id="floorNumLbl" text="3" GridPane.columnIndex="1">
+      <Label fx:id="floorNumLbl" text="1" GridPane.columnIndex="1">
          <GridPane.margin>
-            <Insets left="70.0" />
+            <Insets left="50.0" />
          </GridPane.margin>
       </Label>
       <Rectangle fx:id="rec1" arcHeight="5.0" arcWidth="5.0" fill="GREEN" height="135.0" stroke="BLACK" strokeType="INSIDE" width="173.0" GridPane.rowIndex="1" />
       <Rectangle fx:id="rec2" arcHeight="5.0" arcWidth="5.0" fill="GREEN" height="135.0" stroke="BLACK" strokeType="INSIDE" width="155.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
       <Rectangle fx:id="rec3" arcHeight="5.0" arcWidth="5.0" fill="GREEN" height="135.0" stroke="BLACK" strokeType="INSIDE" width="142.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-      <Rectangle fx:id="rec4" arcHeight="5.0" arcWidth="5.0" fill="GREEN" height="135.0" stroke="BLACK" strokeType="INSIDE" width="134.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+      <Rectangle fx:id="rec4" arcHeight="5.0" arcWidth="5.0" fill="GREEN" height="135.0" stroke="BLACK" strokeType="INSIDE" width="125.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
       <Rectangle fx:id="rec5" arcHeight="5.0" arcWidth="5.0" fill="GREEN" height="119.0" stroke="BLACK" strokeType="INSIDE" width="172.0" GridPane.rowIndex="2" />
       <Rectangle fx:id="rec6" arcHeight="5.0" arcWidth="5.0" fill="GREEN" height="121.0" stroke="BLACK" strokeType="INSIDE" width="155.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
       <Rectangle fx:id="rec7" arcHeight="5.0" arcWidth="5.0" fill="GREEN" height="117.0" stroke="BLACK" strokeType="INSIDE" width="142.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-      <Rectangle fx:id="rec8" arcHeight="5.0" arcWidth="5.0" fill="GREEN" height="117.0" stroke="BLACK" strokeType="INSIDE" width="134.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+      <Rectangle fx:id="rec8" arcHeight="5.0" arcWidth="5.0" fill="GREEN" height="117.0" stroke="BLACK" strokeType="INSIDE" width="125.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
       <Rectangle fx:id="rec9" arcHeight="5.0" arcWidth="5.0" fill="GREEN" height="94.0" stroke="BLACK" strokeType="INSIDE" width="175.0" GridPane.rowIndex="3" />
       <Rectangle fx:id="rec10" arcHeight="5.0" arcWidth="5.0" fill="GREEN" height="94.0" stroke="BLACK" strokeType="INSIDE" width="156.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
       <Rectangle fx:id="rec11" arcHeight="5.0" arcWidth="5.0" fill="GREEN" height="94.0" stroke="BLACK" strokeType="INSIDE" width="142.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-      <Rectangle fx:id="rec12" arcHeight="5.0" arcWidth="5.0" fill="GREEN" height="94.0" stroke="BLACK" strokeType="INSIDE" width="135.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+      <Rectangle fx:id="rec12" arcHeight="5.0" arcWidth="5.0" fill="GREEN" height="94.0" stroke="BLACK" strokeType="INSIDE" width="126.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+      <Rectangle fx:id="rec13" arcHeight="5.0" arcWidth="5.0" fill="GREEN" height="135.0" stroke="BLACK" strokeType="INSIDE" width="100.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+      <Rectangle fx:id="rec14" arcHeight="5.0" arcWidth="5.0" fill="GREEN" height="117.0" stroke="BLACK" strokeType="INSIDE" width="100.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+      <Rectangle fx:id="rec15" arcHeight="5.0" arcWidth="5.0" fill="GREEN" height="96.0" stroke="BLACK" strokeType="INSIDE" width="100.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
    </children>
 </GridPane>
