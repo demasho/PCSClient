@@ -18,12 +18,19 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class OneTimeParkingController {
 
 	@FXML
 	private TextField car_id_text;
+
+	@FXML
+	private Text availableParkingsTxt;
+
+	@FXML
+	private Button showAvailableParkingsBtn;
 
 	@FXML
 	private TextField person_id_text;
@@ -57,6 +64,8 @@ public class OneTimeParkingController {
 
 	@FXML
 	private TextField end_hour_field;
+
+
 
 	private ClientConsole client = ClientConsole.getInstance();
 
@@ -176,7 +185,7 @@ public class OneTimeParkingController {
 			mylert.setResizable(true);
 			mylert.getDialogPane().setPrefSize(480, 170);
 			mylert.show();
-		
+
 			while(client.Done==false)
 			{
 				if(client.Done==true)
@@ -212,5 +221,49 @@ public class OneTimeParkingController {
 	void email_text(ActionEvent event) {
 
 	}
+
+	@FXML
+	void showAvailableAction(ActionEvent event) {
+		String Get = "GET_AVAILABLE_PARKINGS :" ;
+		client.sendRequest(Get);
+		while(true)
+		{
+			System.out.println("while");
+			if(client.Done==true)
+				break;
+		}
+		System.out.println(client.Result);
+		if(client.Result.contains("Failed")== false)
+		{
+			String res=client.Result.replace(' ', ',');
+			availableParkingsTxt.setText(res);	
+		}
+		else
+		{
+			AlertBox.display(client.Result);
+		}
+		client.Done=false;	
+	}
+	
+//	@FXML
+//	void ViewAllComplaints(ActionEvent event) {
+//		String Get = "GET_ALL_COMPLAINT : 333" ;//+ client.ParkingID ;
+//		client.sendRequest(Get);
+//		int hah=0;
+//		while(true)
+//		{
+//			System.out.println("while");
+//			if(client.Done==true)
+//				break;
+//		}
+//		System.out.println(client.Result);
+//		if(client.Result.contains("Failed to get")== false && client.Result.contains("There is no complaint")==false) {
+//			String res=client.Result.replace('|', '\n');
+//			ViewComplaints.setText(res);	
+//		}else {
+//			AlertBox.display(client.Result);
+//		}
+//		client.Done=false;
+//	}	
 
 }

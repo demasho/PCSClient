@@ -19,9 +19,16 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class CasualParkingController extends Main {
+
+	@FXML
+	private Button showAvailableParkingsBtn;
+
+	@FXML
+	private Text viewAvailableTxt;
 
 	@FXML
 	private TextField car_id_text;
@@ -79,7 +86,7 @@ public class CasualParkingController extends Main {
 			person_id_text.setStyle("-fx-text-inner-color: red;");
 			flag=false;
 		}
-		
+
 		try {
 			end_minute =end_minute_field.getText().trim();
 			end_hour =end_hour_field.getText().trim();
@@ -94,7 +101,7 @@ public class CasualParkingController extends Main {
 			String nowDate = year+"-"+month+"-"+day+"/"+now.getHours()
 			+":"+now.getMinutes()+":00";
 			String endDate =  year+"-"+month+"-"+day+"/"+end_hour
-			+":"+end_minute+":00";
+					+":"+end_minute+":00";
 			sent.append(nowDate+" "+endDate+" ");
 		}catch(Exception e){
 			end_hour_field.setText("invalid input");
@@ -103,7 +110,7 @@ public class CasualParkingController extends Main {
 			end_minute_field.setStyle("-fx-text-inner-color: red;");
 			flag=false;
 		}
-		
+
 		try {
 			email=email_field.getText().trim();
 			if(!Validator.isValidEmailAddress(email))
@@ -114,7 +121,7 @@ public class CasualParkingController extends Main {
 			email_field.setStyle("-fx-text-inner-color: red;");
 			flag=false;
 		}
-		
+
 		try
 		{
 			person_id=person_id_text.getText().trim();
@@ -138,7 +145,7 @@ public class CasualParkingController extends Main {
 			flag=false;
 		}
 		System.out.println(sent);
-		
+
 
 		if(flag==true)
 		{
@@ -159,6 +166,29 @@ public class CasualParkingController extends Main {
 		stage.setOnCloseRequest(e -> Platform.exit());
 		Stage curr = (Stage)back_order_button.getScene().getWindow();
 		curr.close();
+	}
+	
+	@FXML
+	void showAvailableAction(ActionEvent event) {
+		String Get = "GET_AVAILABLE_PARKINGS :" ;
+		console.sendRequest(Get);
+		while(true)
+		{
+			System.out.println("while");
+			if(console.Done==true)
+				break;
+		}
+		System.out.println(console.Result);
+		if(console.Result.contains("Failed")== false)
+		{
+			String res=console.Result.replace(' ', '\n');
+			viewAvailableTxt.setText(res);	
+		}
+		else
+		{
+			AlertBox.display(console.Result);
+		}
+		console.Done=false;	
 	}
 
 }

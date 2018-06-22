@@ -75,6 +75,8 @@
       <AnchorPane prefHeight="317.0" prefWidth="301.0" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="back_order_button" layoutX="239.0" layoutY="281.0" mnemonicParsing="false" onAction="#back_order_action" prefHeight="25.0" prefWidth="70.0" text="הקודם" />
+            <Button fx:id="showAvailableParkingsBtn" layoutX="87.0" layoutY="14.0" mnemonicParsing="false" onAction="#showAvailableAction" text="הצג חניונים פנויים" />
+            <Text fx:id="viewAvailableTxt" layoutX="130.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" " />
          </children>
       </AnchorPane>
    </left>
