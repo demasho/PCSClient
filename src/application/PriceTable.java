@@ -1,5 +1,6 @@
 package application;
 
+import client.ClientConsole;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,17 +26,56 @@ import javafx.scene.input.KeyEvent;
 
 
 public class PriceTable extends Application {
+	private ClientConsole client = ClientConsole.getInstance();
+	String res;
+	// GET_UPDATED_PRICES
+	boolean priceUpdated;
+	
 	 private TableView table = new TableView();
 	 final static ObservableList<PriceTableObject> data = FXCollections.observableArrayList(
 			    new PriceTableObject("5", "לפי שעות", "חניה מזדמנת"),
 			    new PriceTableObject("4", "לפי שעות", "חניה חד-פעמית מוזמנת"),
-			    new PriceTableObject("72" , " מחיר קבוע", "מנוי חודשי מלא")
+			    new PriceTableObject("72" , " מחיר קבוע", "מנוי חודשי מלא"),
+			    new PriceTableObject("100" , " מחיר קבוע", "מנוי עסקי")
 			    
 			);
 	 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void start(Stage primaryStage) {
+		/**** if prices are updated ***********/
+		client.sendRequest("GET_UPDATED_PRICES :");
+		while(true)
+		{
+			System.out.println("while");
+			if(client.Done==true)
+				break;
+		}
+		String[] parts = null  ;
+		if(client.Result.contains("New Prices"))
+		{
+			System.out.println("PRICE TABLE:contains new prices");
+			parts=client.Result.split(" ");
+			priceUpdated = true;
+		}
+		else
+		{
+			 	System.out.println("PRICE TABLE:does not contain new prices");
+				priceUpdated = false;
+		}
+		
+		client.Done=false;
+		
+		System.out.println("client REsUUlt");
+		System.out.println(client.Result);
+		System.out.println(priceUpdated);
+		
+		if(priceUpdated)
+		{
+			
+			data.clear();
+			
+		}
 		Scene scene = new Scene(new Group());
 		primaryStage.setTitle("תמחור");
 		primaryStage.setWidth(500);

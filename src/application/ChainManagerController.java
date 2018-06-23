@@ -69,8 +69,40 @@ public class ChainManagerController implements Initializable {
 		System.out.println("aaaaaa");
 		cb.setItems(FXCollections.observableArrayList(parts));
 		
+		/****** check if prices were updated *****/
+		client.sendRequest("GET_UPDATED_PRICES :");
+		while(true)
+		{
+			System.out.println("while");
+			if(client.Done==true)
+				break;
+		}
+		String finalRes = null;
+		if(client.Result.contains("New Prices"))
+		{
+			System.out.println("contains new prices");
+			parts=client.Result.split(" ");
+			finalRes = client.Result.replace("$", "\n");
+			priceUpdated = true;
+		}
+		else
+		{
+			 	System.out.println("does not contain new prices");
+				priceUpdated = false;
+		}
+		
+		client.Done=false;
+		
+		System.out.println("client REsult");
+		System.out.println(client.Result);
+		System.out.println(priceUpdated);
+		
+		
+		//New Prices : CasualParking -> 9.0$ OneTimeOrders -> 9.0$ FullMonthlySubscription -> 9.0$ BusinessMonthlySubscription -> 9.0$
 		if(priceUpdated)
 		{
+			System.out.println("in if priceUpdated");
+			label.setText(finalRes);
 			okBtn.setVisible(true);
 			notOk.setVisible(true);
 			label.setVisible(true);
@@ -167,12 +199,12 @@ public class ChainManagerController implements Initializable {
 	@FXML
 	void OkAction(ActionEvent ae)
 	{
-		
+		client.sendRequest("APPROVES_PRICES : ");
 	}
 	@FXML
 	void notOkAction(ActionEvent ae)
 	{
-		
+		client.sendRequest("NOT_APPROVES_PRICES : ");
 	}
 	
 	void setUpdatedPrice()

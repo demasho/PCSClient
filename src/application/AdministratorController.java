@@ -57,6 +57,7 @@ public class AdministratorController {
 				}
 				client.Done=false;				
 				AlertBox.display(client.Result);
+				
 			}
 		}
 	}

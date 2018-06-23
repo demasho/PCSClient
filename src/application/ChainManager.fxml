@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
@@ -10,7 +15,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="446.0" prefWidth="644.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ChainManagerController">
+<BorderPane prefHeight="446.0" prefWidth="644.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ChainManagerController">
    <top>
       <StackPane prefHeight="102.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
@@ -37,8 +42,8 @@
             </VBox>
             <ChoiceBox fx:id="cb" layoutX="280.0" layoutY="30.0" prefWidth="150.0" />
             <Button fx:id="okBtn" layoutX="58.0" layoutY="131.0" mnemonicParsing="false" onAction="#OkAction" text="אשר שינוי" visible="false" />
-            <Button fx:id="notOk" layoutX="62.0" layoutY="175.0" mnemonicParsing="false" onAction="#notOkAction" text="אל תאשר שינוי" visible="false" />
-            <Label fx:id="label" layoutX="16.0" layoutY="95.0" text="חל שינוי בטבלת המחירים!" visible="false" />
+            <Button fx:id="notOk" layoutX="45.0" layoutY="182.0" mnemonicParsing="false" onAction="#notOkAction" text="אל תאשר שינוי" visible="false" />
+            <Label fx:id="label" layoutX="145.0" layoutY="227.0" text="חל שינוי בטבלת המחירים!" visible="false" />
             <Label layoutX="470.0" layoutY="34.0" text="חניון" />
             <Label layoutX="470.0" layoutY="95.0" text="קומה" />
             <ChoiceBox fx:id="cbFloor" layoutX="280.0" layoutY="91.0" prefWidth="150.0" />
