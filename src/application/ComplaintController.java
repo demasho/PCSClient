@@ -66,21 +66,14 @@ public class ComplaintController {
 			sent.append(complaint);
 			ClientConsole client=ClientConsole.getInstance();
 			client.sendRequest(sent.toString());
-			javafx.scene.control.Alert mylert = new Alert(Alert.AlertType.INFORMATION," Operation in Progress");
-			mylert.getButtonTypes().clear();
-			mylert.setResizable(true);
-			mylert.getDialogPane().setPrefSize(480, 170);
-			mylert.show();
-			
+			AlertBox.display("Loading .. click OK plese");
 			while(client.Done==false)
 			{
 				if(client.Done==true)
 					break;
 			}
+			AlertBox.display(client.Result);
 			client.Done=false;
-			mylert.getButtonTypes().add(ButtonType.OK);
-			mylert.setContentText(client.Result);
-			mylert.show();
 		}
 		else
 			AlertBox.display("הגשת תלונה", "הנתונים שגויים", "נא לעדכן את הנתונים");

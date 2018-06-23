@@ -69,7 +69,6 @@
                   <Font size="17.0" />
                </font>
             </Text>
-            <TextField fx:id="park_id_text" layoutX="-67.0" layoutY="107.0" />
             <Text layoutX="88.0" layoutY="172.0" strokeType="OUTSIDE" strokeWidth="0.0" text="דואר אלקטרוני:">
                <font>
                   <Font size="17.0" />
@@ -81,6 +80,7 @@
                   <Font size="17.0" />
                </font>
             </Text>
+            <ChoiceBox fx:id="park_id_text" layoutX="-67.0" layoutY="106.0" prefWidth="150.0" />
          </children>
       </AnchorPane>
    </right>
@@ -89,8 +89,6 @@
          <children>
             <Button fx:id="next_order_button" layoutX="407.0" layoutY="162.0" mnemonicParsing="false" onAction="#NextOrderAction" prefHeight="25.0" prefWidth="71.0" text="הבא" />
             <Button fx:id="back_order_button" layoutX="191.0" layoutY="162.0" mnemonicParsing="false" onAction="#back_order_action" prefHeight="25.0" prefWidth="70.0" text="הקודם" />
-            <Text fx:id="availableParkingsTxt" layoutX="455.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" " />
-            <Button fx:id="showAvailableParkingsBtn" layoutX="528.0" layoutY="50.0" mnemonicParsing="false" onAction="#showAvailableAction" text="הצג חניונים פנויים" />
          </children>
       </AnchorPane>
    </bottom>

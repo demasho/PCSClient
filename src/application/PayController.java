@@ -15,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -51,11 +52,7 @@ public class PayController {
 		sent.append("GET_PAYMENT : ");
 		sent.append(order);
 		client.sendRequest(sent.toString());
-		javafx.scene.control.Alert mylert = new Alert(Alert.AlertType.INFORMATION," Operation in Progress");
-		mylert.getButtonTypes().clear();
-		mylert.setResizable(true);
-		mylert.getDialogPane().setPrefSize(480, 170);
-		mylert.show();		
+		AlertBox.display("Loading .. click OK plese");
 		while(client.Done==false)
 		{
 			if(client.Done==true)
@@ -64,13 +61,9 @@ public class PayController {
 		client.Done=false;
 		if(client.Result.contains("failed"))
 		{
-			mylert.getButtonTypes().add(ButtonType.OK);
-			mylert.setContentText(client.Result);
-			mylert.show();
+			AlertBox.display(client.Result);
 		}else {
-			mylert.getButtonTypes().add(ButtonType.OK);
-			mylert.setContentText("got Payment");
-			mylert.show();
+			AlertBox.display("got Payment");
 			payButton.setDisable(false);
 			payButton.setVisible(true);
 			payment.setVisible(true);
@@ -82,27 +75,21 @@ public class PayController {
 	@FXML
 	void pay(ActionEvent event) {
 		StringBuilder sent=new StringBuilder();
-		javafx.scene.control.Alert mylert = new Alert(Alert.AlertType.INFORMATION," Operation in Progress");
 		if(creditnumber.getText().isEmpty()==false&& creditnumber.getText().length()> 10 && Validator.isNum(creditnumber.getText())==true) {
 			sent.append("PAY_ANDOUT : ");
 			sent.append(order);
 			client.sendRequest(sent.toString());
-			mylert.setResizable(true);
-			mylert.getDialogPane().setPrefSize(480, 170);
-			mylert.show();
+			AlertBox.display("Loading .. click OK plese");
 			while(client.Done==false)
 			{
 				if(client.Done==true)
 					break;
 			}
+			AlertBox.display(client.Result);
 			client.Done=false;
-			mylert.close();
-			mylert.setContentText(client.Result);
-			mylert.show();
 		}
 		else {
-			mylert.setContentText("your credit card number WRONG!");
-			mylert.show();
+			AlertBox.display("your credit card number WRONG!");
 		}
 	}
 
@@ -120,9 +107,11 @@ public class PayController {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("CustomerScene.fxml"));
 		GridPane root1 = fxmlLoader.load();
 		Stage stage = new Stage();
-		stage.setScene(new Scene(root1));  
+		stage.setScene(new Scene(root1)); 
 		stage.show();
 		stage.setOnCloseRequest(e -> Platform.exit());
+		Stage curr = (Stage) back_order_button.getScene().getWindow();
+		curr.close();
 	}
 
 }

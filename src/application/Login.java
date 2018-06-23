@@ -110,23 +110,19 @@ public class Login extends Application {
 					else {
 						signInString = "Login : " + username + " " + password;
 						client.sendRequest(signInString);
-						javafx.scene.control.Alert mylert = new Alert(Alert.AlertType.INFORMATION," Operation in Progress");
-						mylert.setResizable(true);
-						mylert.getDialogPane().setPrefSize(480, 170);
-						mylert.showAndWait();
-						while(client.Done == false)
+						AlertBox.display("Loading .. click OK plese");
+						while(client.Done==false)
 						{
-							System.out.println("while");
 							if(client.Done==true)
 								break;
 						}
-						client.Done=false;
 						if(client.Result.contains("Success")==true) {
 							String msg=client.Result;
 							String sub= msg.substring(msg.indexOf(":")+2, msg.length());
 							String[] parts=sub.split(" ");
 							String role =parts[0];
 							System.out.println(role+"here");
+							client.Done=false;
 							try {
 								client.ParkingID=parts[1];
 								if(role.contains("Kiosk_Worker"))
@@ -142,8 +138,7 @@ public class Login extends Application {
 							catch(Exception f){}
 						}
 						else {
-							mylert.setContentText(client.Result);
-							mylert.show();
+							AlertBox.display(client.Result);
 						}
 					}
 				}

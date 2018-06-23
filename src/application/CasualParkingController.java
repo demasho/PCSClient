@@ -1,36 +1,36 @@
 package application;
 
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 
 import java.io.IOException;
 import java.lang.Object;
+import java.net.URL;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Observable;
+import java.util.ResourceBundle;
+
 import application.Main;
 import client.ChatClient;
 import client.ClientConsole;
 import client.ObservableClient;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class CasualParkingController extends Main {
-
-	@FXML
-	private Button showAvailableParkingsBtn;
-
-	@FXML
-	private Text viewAvailableTxt;
+public class CasualParkingController extends Main implements Initializable{
 
 	@FXML
 	private TextField car_id_text;
@@ -39,7 +39,7 @@ public class CasualParkingController extends Main {
 	private TextField person_id_text;
 
 	@FXML
-	private TextField park_id_text;
+	private ChoiceBox park_id_text;
 
 	@FXML
 	private TextField end_minute_field;
@@ -80,7 +80,7 @@ public class CasualParkingController extends Main {
 		//////////
 		try
 		{
-			park_id=park_id_text.getText().trim();
+			park_id=park_id_text.getSelectionModel().getSelectedItem().toString();
 			sent.append(park_id + " ");
 		}catch (Exception e) {
 			person_id_text.setText("invalid input;");
@@ -151,20 +151,14 @@ public class CasualParkingController extends Main {
 		if(flag==true)
 		{
 			client.sendRequest(sent.toString());
-			javafx.scene.control.Alert mylert = new Alert(Alert.AlertType.INFORMATION," Operation in Progress");
-			mylert.getButtonTypes().clear();
-			mylert.setResizable(true);
-			mylert.getDialogPane().setPrefSize(480, 170);
-			mylert.show();	
+			AlertBox.display("Loading .. click OK plese");
 			while(client.Done==false)
 			{
 				if(client.Done==true)
 					break;
 			}
-			mylert.getButtonTypes().add(ButtonType.OK);
-			mylert.setContentText(client.Result);
+			AlertBox.display(client.Result);
 			client.Done=false;
-			mylert.show();
 		}
 		else
 			AlertBox.display("הזמנת חניה", "הנתונים שגויים", "נא לעדכן את הנתונים");
@@ -181,28 +175,30 @@ public class CasualParkingController extends Main {
 		Stage curr = (Stage)back_order_button.getScene().getWindow();
 		curr.close();
 	}
-	
-	@FXML
-	void showAvailableAction(ActionEvent event) {
-		String Get = "GET_AVAILABLE_PARKINGS :" ;
-		client.sendRequest(Get);
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		client.sendRequest("GET_ALL_PARKINGS :");
 		while(true)
 		{
 			System.out.println("while");
 			if(client.Done==true)
 				break;
 		}
-		System.out.println(client.Result);
+		String[] parts = null  ;
 		if(client.Result.contains("Failed")== false)
 		{
-			String res=client.Result.replace(' ', '\n');
-			viewAvailableTxt.setText(res);	
+			 parts=client.Result.split(" ");	
 		}
 		else
 		{
 			AlertBox.display(client.Result);
 		}
-		client.Done=false;	
+		client.Done=false;
+
+		System.out.println("aaaaaa");
+		park_id_text.setItems(FXCollections.observableArrayList(parts));
+		
 	}
 
 }

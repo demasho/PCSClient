@@ -48,14 +48,14 @@ public class AdministratorController {
 				sent.append(porder+" ");
 				sent.append(rsubs+" ");
 				sent.append(bsubs);
-				client.sendRequest(sent.toString());	
+				client.sendRequest(sent.toString());
+				AlertBox.display("Loading .. click OK plese");
 				while(client.Done==false)
 				{
 					if(client.Done==true)
 						break;
 				}
-				client.Done=false;
-				
+				client.Done=false;				
 				AlertBox.display(client.Result);
 			}
 		}

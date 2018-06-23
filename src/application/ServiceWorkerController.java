@@ -69,7 +69,7 @@ public class ServiceWorkerController {
 	}
 	@FXML
 	void ViewAllComplaints(ActionEvent event) {
-		String Get = "GET_ALL_COMPLAINT : 333" ;//+ client.ParkingID ;
+		String Get = "GET_ALL_COMPLAINT : "+ client.ParkingID ;
 		client.sendRequest(Get);
 		int hah=0;
 		while(true)

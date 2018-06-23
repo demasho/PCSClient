@@ -1,42 +1,41 @@
 package application;
 
 import java.io.IOException;
+import java.net.URL;
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.EmptyStackException;
+import java.util.ResourceBundle;
 
 import client.ChatClient;
 import client.ClientConsole;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class OneTimeParkingController {
+public class OneTimeParkingController implements Initializable {
 
 	@FXML
 	private TextField car_id_text;
 
 	@FXML
-	private Text availableParkingsTxt;
-
-	@FXML
-	private Button showAvailableParkingsBtn;
-
-	@FXML
 	private TextField person_id_text;
 
 	@FXML
-	private TextField park_id_text;
+	private ChoiceBox park_id_text;
 
 	@FXML
 	private TextField email_field;
@@ -106,16 +105,8 @@ public class OneTimeParkingController {
 			flag=false;
 		}
 
-		try {
-			park_id=park_id_text.getText().trim();
-			if(!Validator.isValidRequestedPark(park_id))
-				throw new Exception();
-			sent.append(park_id+" ");
-		}catch(Exception e) {
-			park_id_text.setText("invalid input");
-			park_id_text.setStyle("-fx-text-inner-color: red;");
-			flag=false;
-		}
+		park_id=park_id_text.getSelectionModel().getSelectedItem().toString();
+		sent.append(park_id+" ");
 		try {
 			LocalDate startlocalDate = start_date_text.getValue();
 			try {
@@ -178,23 +169,16 @@ public class OneTimeParkingController {
 		}
 
 		if(flag==true)
-		{
+		{		
 			client.sendRequest(sent.toString());
-			javafx.scene.control.Alert mylert = new Alert(Alert.AlertType.INFORMATION," Operation in Progress");
-			mylert.getButtonTypes().clear();
-			mylert.setResizable(true);
-			mylert.getDialogPane().setPrefSize(480, 170);
-			mylert.show();
-
+			AlertBox.display("Loading .. click OK plese");
 			while(client.Done==false)
 			{
 				if(client.Done==true)
 					break;
 			}
+			AlertBox.display(client.Result);
 			client.Done=false;
-			mylert.getButtonTypes().add(ButtonType.OK);
-			mylert.setContentText(client.Result);
-			mylert.show();
 		}	
 		else
 			AlertBox.display("הזמנת חניה", "הנתונים שגויים", "נא לעדכן את הנתונים");	
@@ -222,48 +206,52 @@ public class OneTimeParkingController {
 
 	}
 
-	@FXML
-	void showAvailableAction(ActionEvent event) {
-		String Get = "GET_AVAILABLE_PARKINGS :" ;
-		client.sendRequest(Get);
+
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		client.sendRequest("GET_ALL_PARKINGS :");
 		while(true)
 		{
 			System.out.println("while");
 			if(client.Done==true)
 				break;
 		}
-		System.out.println(client.Result);
+		String[] parts = null  ;
 		if(client.Result.contains("Failed")== false)
 		{
-			String res=client.Result.replace(' ', ',');
-			availableParkingsTxt.setText(res);	
+			parts=client.Result.split(" ");	
 		}
 		else
 		{
 			AlertBox.display(client.Result);
 		}
-		client.Done=false;	
+		client.Done=false;
+
+		System.out.println("aaaaaa");
+		park_id_text.setItems(FXCollections.observableArrayList(parts));
+
 	}
-	
-//	@FXML
-//	void ViewAllComplaints(ActionEvent event) {
-//		String Get = "GET_ALL_COMPLAINT : 333" ;//+ client.ParkingID ;
-//		client.sendRequest(Get);
-//		int hah=0;
-//		while(true)
-//		{
-//			System.out.println("while");
-//			if(client.Done==true)
-//				break;
-//		}
-//		System.out.println(client.Result);
-//		if(client.Result.contains("Failed to get")== false && client.Result.contains("There is no complaint")==false) {
-//			String res=client.Result.replace('|', '\n');
-//			ViewComplaints.setText(res);	
-//		}else {
-//			AlertBox.display(client.Result);
-//		}
-//		client.Done=false;
-//	}	
+
+	//	@FXML
+	//	void ViewAllComplaints(ActionEvent event) {
+	//		String Get = "GET_ALL_COMPLAINT : 333" ;//+ client.ParkingID ;
+	//		client.sendRequest(Get);
+	//		int hah=0;
+	//		while(true)
+	//		{
+	//			System.out.println("while");
+	//			if(client.Done==true)
+	//				break;
+	//		}
+	//		System.out.println(client.Result);
+	//		if(client.Result.contains("Failed to get")== false && client.Result.contains("There is no complaint")==false) {
+	//			String res=client.Result.replace('|', '\n');
+	//			ViewComplaints.setText(res);	
+	//		}else {
+	//			AlertBox.display(client.Result);
+	//		}
+	//		client.Done=false;
+	//	}	
 
 }

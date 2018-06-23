@@ -112,20 +112,14 @@ public class SubscriptionParkingController {
 		if(flag==true)
 		{
 			client.sendRequest(sent.toString());
-			javafx.scene.control.Alert mylert = new Alert(Alert.AlertType.INFORMATION," Operation in Progress");
-			mylert.getButtonTypes().clear();
-			mylert.setResizable(true);
-			mylert.getDialogPane().setPrefSize(480, 170);
-			mylert.show();	
+			AlertBox.display("Loading .. click OK plese");
 			while(client.Done==false)
 			{
 				if(client.Done==true)
 					break;
 			}
-			mylert.getButtonTypes().add(ButtonType.OK);
-			mylert.setContentText(client.Result);
+			AlertBox.display(client.Result);
 			client.Done=false;
-			mylert.show();
 		}
 		else
 			AlertBox.display("הזמנת חניה", "הנתונים שגויים", "נא לעדכן את הנתונים");

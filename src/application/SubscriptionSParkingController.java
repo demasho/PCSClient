@@ -128,7 +128,7 @@ public class SubscriptionSParkingController {
 			email_field.setStyle("-fx-text-inner-color: red;");
 			flag=false;
 		}
-		
+
 		int foo =0;
 		try {
 			foo = Integer.parseInt(numberOfCars.getText().trim());
@@ -691,20 +691,14 @@ public class SubscriptionSParkingController {
 			if(flag==true)
 			{
 				client.sendRequest(sent.toString());
-				javafx.scene.control.Alert mylert = new Alert(Alert.AlertType.INFORMATION," Operation in Progress");
-				mylert.getButtonTypes().clear();
-				mylert.setResizable(true);
-				mylert.getDialogPane().setPrefSize(480, 170);
-				mylert.show();	
+				AlertBox.display("Loading .. click OK plese");
 				while(client.Done==false)
 				{
 					if(client.Done==true)
 						break;
 				}
-				mylert.getButtonTypes().add(ButtonType.OK);
-				mylert.setContentText(client.Result);
+				AlertBox.display(client.Result);
 				client.Done=false;
-				mylert.show();
 			}
 			else
 				AlertBox.display("הזמנת חניה", "הנתונים שגויים", "נא לעדכן את הנתונים");
@@ -720,7 +714,7 @@ public class SubscriptionSParkingController {
 		stage.setScene(new Scene(root1));  
 		stage.show();
 		stage.setOnCloseRequest(e -> Platform.exit());
-       	Stage curr = (Stage)back_order_button.getScene().getWindow();
+		Stage curr = (Stage)back_order_button.getScene().getWindow();
 		curr.close();
 	}
 
