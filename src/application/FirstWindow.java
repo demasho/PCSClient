@@ -63,8 +63,7 @@ public class FirstWindow extends Application {
 		    	Stage stage = new Stage();
 		    	stage.setScene(new Scene(root1));  
 		    	stage.show();
-		    	stage.setOnCloseRequest(e -> Platform.exit());
-				
+		    	stage.setOnCloseRequest(e -> stage.close());			
 			}
 		});
 		 
@@ -74,12 +73,8 @@ public class FirstWindow extends Application {
 				customer = false;
 				Login login = new Login();
 				login.start(new Stage());
-				
 			}
 		});
-		 
-		 
-
 		 Scene scene = new Scene(grid, 300, 275);
 		 primaryStage.setScene(scene);
 	        primaryStage.show();

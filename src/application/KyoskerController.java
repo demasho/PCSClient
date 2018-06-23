@@ -78,7 +78,7 @@ public class KyoskerController {
 		}
 		else{
 			client.sendRequest("DISABLED_PLACES_SYSTEM : "+disabledParkId+" "
-		+"("+rowNum+","+columnNum+","+floorNum+")");
+		+"("+columnNum+","+rowNum+","+floorNum+")");
 			javafx.scene.control.Alert mylert = new Alert(Alert.AlertType.INFORMATION," Operation in Progress");
 			mylert.setResizable(true);
 			mylert.getDialogPane().setPrefSize(480, 170);

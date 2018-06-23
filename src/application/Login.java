@@ -34,7 +34,7 @@ public class Login extends Application {
 	String signInString;
 
 	private ClientConsole client = ClientConsole.getInstance();
-
+	private Label userName ;
 	public String getData()
 	{
 		return signInString;
@@ -54,7 +54,7 @@ public class Login extends Application {
 		grid.add(scenetitle, 0, 0, 2, 1);
 
 
-		Label userName = new Label("שם משתמש:");
+		userName = new Label("שם משתמש:");
 		grid.add(userName, 1, 1);
 
 		TextField userTextField = new TextField();
@@ -129,7 +129,6 @@ public class Login extends Application {
 							System.out.println(role+"here");
 							try {
 								client.ParkingID=parts[1];
-								loadServiceWoker();
 								if(role.contains("Kiosk_Worker"))
 									loadKyoskWorker();
 								if(role.contains("Service_Worker"))
@@ -172,7 +171,11 @@ public class Login extends Application {
 		Stage stage = new Stage();
 		stage.setScene(new Scene(root1));  
 		stage.show();    	
-		stage.setOnCloseRequest(e -> Platform.exit());
+		stage.setOnCloseRequest(e ->{
+			client.sendRequest("Logout : "+username);
+			stage.close();});
+		Stage curr = (Stage)userName.getScene().getWindow();
+		curr.close();
 	}
 	public void loadChainManager() throws IOException
 	{
@@ -181,7 +184,11 @@ public class Login extends Application {
 		Stage stage = new Stage();
 		stage.setScene(new Scene(root1));  
 		stage.show();    	
-		stage.setOnCloseRequest(e -> Platform.exit());
+		stage.setOnCloseRequest(e ->{
+			client.sendRequest("Logout : "+username);
+			stage.close();});
+		Stage curr = (Stage)userName.getScene().getWindow();
+		curr.close();
 	}
 	public void loadKyoskWorker() throws IOException
 	{
@@ -190,7 +197,11 @@ public class Login extends Application {
 		Stage stage = new Stage();
 		stage.setScene(new Scene(root1));  
 		stage.show();    	
-		stage.setOnCloseRequest(e -> Platform.exit());
+		stage.setOnCloseRequest(e ->{
+			client.sendRequest("Logout : "+username);
+			stage.close();});
+		Stage curr = (Stage)userName.getScene().getWindow();
+		curr.close();
 	}
 	public void loadServiceWoker() throws IOException
 	{
@@ -199,7 +210,11 @@ public class Login extends Application {
 		Stage stage = new Stage();
 		stage.setScene(new Scene(root1));  
 		stage.show();    	
-		stage.setOnCloseRequest(e -> Platform.exit());
+		stage.setOnCloseRequest(e ->{
+			client.sendRequest("Logout : "+username);
+			stage.close();});
+		Stage curr = (Stage)userName.getScene().getWindow();
+		curr.close();
 	}
 
 	public static void main(String[] args) {

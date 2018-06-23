@@ -42,15 +42,32 @@ public class ChainManagerController implements Initializable {
 	
 	private ClientConsole client = ClientConsole.getInstance();
 	
-	String selectedChoice ,selectedChoiceFloor ;
+	String selectedChoice ,selectedChoiceFloor ,allParkings;
 	boolean priceUpdated = false;
 	@SuppressWarnings("unchecked")
 	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		cb.setItems(FXCollections.observableArrayList(
-			    "101", "102", 
-			    "103", "104")
-			);
+	public void initialize(URL location, ResourceBundle resources)
+	{
+		client.sendRequest("GET_ALL_PARKINGS :");
+		while(true)
+		{
+			System.out.println("while");
+			if(client.Done==true)
+				break;
+		}
+		String[] parts = null  ;
+		if(client.Result.contains("Failed")== false)
+		{
+			 parts=client.Result.split(" ");	
+		}
+		else
+		{
+			AlertBox.display(client.Result);
+		}
+		client.Done=false;
+
+		System.out.println("aaaaaa");
+		cb.setItems(FXCollections.observableArrayList(parts));
 		
 		if(priceUpdated)
 		{
@@ -87,7 +104,7 @@ public class ChainManagerController implements Initializable {
 			AlertBox.display("please select park and floor");
 		}
 		else {
-			parkAssignment = "P(0,0,1) P(1,1,1) P(0,0,2) B(1,3,2) P(0,0,3) B(0,1,3) 2 5";
+			parkAssignment = "";
 			System.out.println(selectedChoice);
 			System.out.println(selectedChoiceFloor);
 			
@@ -99,15 +116,16 @@ public class ChainManagerController implements Initializable {
 				
 			while(client.Done==false)
 			{
+				System.out.println("while");
 				if(client.Done==true)
 					break;
 			}
-			client.Done=false;
+			//client.Done=false;
 			
 			 System.out.println("client result");
 			 System.out.println(client.Result);
 			
-			if(client.Result.contains("failed"))
+			if(client.Result.contains("Failed"))
 			{
 				System.out.println("failed miserably");
 				
@@ -180,7 +198,7 @@ public class ChainManagerController implements Initializable {
     	Stage stage = new Stage();
     	stage.setScene(new Scene(root1));  
     	stage.show();    	
-    	stage.setOnCloseRequest(e -> Platform.exit());
+    	stage.setOnCloseRequest(e -> stage.close());
 	}
 
 	/*

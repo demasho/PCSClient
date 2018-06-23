@@ -39,8 +39,6 @@ public class ClientConsole implements ChatIF
    */
 //  private static ClientConsole console = new ClientConsole("localhost", DEFAULT_PORT);
   private static ChatClient client;
-
-  
   //Constructors ****************************************************
 
   /**

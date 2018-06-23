@@ -177,7 +177,7 @@ public class CasualParkingController extends Main {
 		Stage stage = new Stage();
 		stage.setScene(new Scene(root1));  
 		stage.show();
-		stage.setOnCloseRequest(e -> Platform.exit());
+		stage.setOnCloseRequest(e -> stage.close());
 		Stage curr = (Stage)back_order_button.getScene().getWindow();
 		curr.close();
 	}

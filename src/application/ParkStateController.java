@@ -19,21 +19,12 @@ import javafx.stage.Stage;
 public class ParkStateController {
 	
 	
-	public int column_num,availableParks;
+	public int column_num,savedParks;
 	
 
-	public char mat1[][] = { { 'A', 'A', 'A', 'A' },
-			{ 'A', 'A', 'A', 'A' },
-			{ 'A', 'A', 'A', 'A' } };
-	
-	public char mat2[][] = { { 'A', 'A', 'A', 'A' },
-			{ 'A', 'A', 'A', 'A' },
-			{ 'A', 'A', 'A', 'A' } };
-	
-	public char mat3[][] = { { 'A', 'A', 'A', 'A' },
-			{ 'A', 'A', 'A', 'A' },
-			{ 'A', 'A', 'A', 'A' } };
-	
+	public char[][] mat1  ;	
+	public char[][] mat2 ;	
+	public char[][] mat3 ;	
 	
 	public ParkStateController() {
 		
@@ -43,16 +34,15 @@ public class ParkStateController {
 	// ex. for data : P(x,y,z) P(x,y,z) P(x,y,z) A(x,y,z) A(x,y,z) A(x,y,z) 2 4
 	public  void createPark(String data)
 	{
-		
-		String[] array = data.split("\\ "); 
-		System.out.println(Arrays.toString(array));
-		
+		String[] array = data.split("\\ "); 	
 		column_num =  Integer.parseInt(array[array.length-1]);
-		availableParks =  Integer.parseInt(array[array.length-2]);
-		
+		savedParks =  Integer.parseInt(array[array.length-2]);
 		String[] newArray = new String[array.length-2];
 		newArray=Arrays.copyOf(array,array.length-2);
-		
+		System.out.println(Arrays.toString(newArray));
+		mat1 = new char[3][column_num];
+		mat2 = new char[3][column_num];
+		mat3 = new char[3][column_num];
 		char parkState; // P (Parked) , A (Available) , B (Bad)
 		char row,col,floor;
 		
@@ -64,14 +54,14 @@ public class ParkStateController {
 		for (int i = 0; i < newArray.length; i++)
 		{
 			parkState = (newArray[i]).charAt(0);
-			row = (newArray[i]).charAt(2);
-			col = (newArray[i]).charAt(4);
+			col = (newArray[i]).charAt(2);
+			row = (newArray[i]).charAt(4);
 			floor = (newArray[i]).charAt(6);
 			
 			int x = Character.getNumericValue(row);
 			int y = Character.getNumericValue(col);
 			
-			if(floor=='1')
+			if(floor=='0')
 			{
 				if(parkState=='P')
 				{
@@ -89,7 +79,7 @@ public class ParkStateController {
 				}
 				
 			}
-			if(floor=='2')
+			if(floor=='1')
 			{
 				if(parkState=='P')
 				{
@@ -107,7 +97,7 @@ public class ParkStateController {
 				}
 				
 			}
-			if(floor=='3')
+			if(floor=='2')
 			{
 				if(parkState=='P')
 				{

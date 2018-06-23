@@ -46,7 +46,7 @@ public class CustomerController {
     	Stage stage = new Stage();
     	stage.setScene(new Scene(root1));  
     	stage.show();
-    	stage.setOnCloseRequest(e -> Platform.exit());
+    	stage.setOnCloseRequest(e -> stage.close());
     }
 
     @FXML
@@ -56,7 +56,7 @@ public class CustomerController {
     	Stage stage = new Stage();
     	stage.setScene(new Scene(root1));  
     	stage.show();    	
-    	stage.setOnCloseRequest(e -> Platform.exit());   
+    	stage.setOnCloseRequest(e -> stage.close());   
     }
 
     @FXML
@@ -66,7 +66,7 @@ public class CustomerController {
     	Stage stage = new Stage();
     	stage.setScene(new Scene(root1));  
     	stage.show();
-    	stage.setOnCloseRequest(e -> Platform.exit()); 	
+    	stage.setOnCloseRequest(e -> stage.close()); 	
     }
     
     @FXML
@@ -76,8 +76,8 @@ public class CustomerController {
     	Stage stage = new Stage();
     	stage.setScene(new Scene(root1));  
     	stage.show();
-    	stage.setOnCloseRequest(e -> Platform.exit());
-    }
+    	stage.setOnCloseRequest(e -> stage.close());
+   	}
     @FXML
     void ShowPricesClick(MouseEvent event) throws IOException{ 	
     	PriceTable prices = new PriceTable();

@@ -42,6 +42,7 @@ public class OrderParkController {
     	Stage stage = new Stage();
     	stage.setScene(new Scene(root1));  
     	stage.show();
+    	stage.setOnCloseRequest(e -> stage.close());
        	Stage curr = (Stage)casualButton.getScene().getWindow();
     	curr.close();
     }
@@ -52,7 +53,8 @@ public class OrderParkController {
     	BorderPane root1 = fxmlLoader.load();
     	Stage stage = new Stage();
     	stage.setScene(new Scene(root1));  
-    	stage.show();    	
+    	stage.show();
+    	stage.setOnCloseRequest(e -> stage.close());
 		Stage curr = (Stage)oneTimeButton.getScene().getWindow();
 		curr.close();
 
@@ -65,6 +67,7 @@ public class OrderParkController {
     	Stage stage = new Stage();
     	stage.setScene(new Scene(root1));  
     	stage.show();
+    	stage.setOnCloseRequest(e -> stage.close());
     	Stage curr = (Stage)subscriptionButton.getScene().getWindow();
 		curr.close();
     }
@@ -75,10 +78,10 @@ public class OrderParkController {
     	BorderPane root1 = fxmlLoader.load();
     	Stage stage = new Stage();
     	stage.setScene(new Scene(root1));  
-    	stage.show();  	
+    	stage.show();
+    	stage.setOnCloseRequest(e -> stage.close());
        	Stage curr = (Stage)subscriptionSButton.getScene().getWindow();
     	curr.close();
-
     }
 
 }
