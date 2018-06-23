@@ -93,10 +93,6 @@ public class ChainManagerController implements Initializable {
 		
 		client.Done=false;
 		
-		System.out.println("client REsult");
-		System.out.println(client.Result);
-		System.out.println(priceUpdated);
-		
 		
 		//New Prices : CasualParking -> 9.0$ OneTimeOrders -> 9.0$ FullMonthlySubscription -> 9.0$ BusinessMonthlySubscription -> 9.0$
 		if(priceUpdated)
@@ -137,13 +133,11 @@ public class ChainManagerController implements Initializable {
 		}
 		else {
 			parkAssignment = "";
-			System.out.println(selectedChoice);
-			System.out.println(selectedChoiceFloor);
-			
+
+			String Choice =cb.getSelectionModel().getSelectedItem().toString().trim();
 			/************ connect with server *****************/
-			String request = "PARKING_SNAPSHOT : 333";
-			System.out.println("i have the tools");
-			System.out.println(request);
+			String request = "PARKING_SNAPSHOT : "+Choice;
+
 			client.sendRequest(request.toString());
 				
 			while(client.Done==false)
@@ -153,9 +147,6 @@ public class ChainManagerController implements Initializable {
 					break;
 			}
 			//client.Done=false;
-			
-			 System.out.println("client result");
-			 System.out.println(client.Result);
 			
 			if(client.Result.contains("Failed"))
 			{
@@ -200,11 +191,13 @@ public class ChainManagerController implements Initializable {
 	void OkAction(ActionEvent ae)
 	{
 		client.sendRequest("APPROVES_PRICES : ");
+		label.setText(" ");
 	}
 	@FXML
 	void notOkAction(ActionEvent ae)
 	{
 		client.sendRequest("NOT_APPROVES_PRICES : ");
+		label.setText(" ");
 	}
 	
 	void setUpdatedPrice()
