@@ -110,7 +110,7 @@ public class SubscriptionSParkingController {
 			String startDate = format.format(start_date_field.getValue());		
 			if(start_date_field.getValue().isBefore(LocalDate.now()))
 				throw new Exception();			
-			sent.append(startDate+" ");
+			sent.append(startDate+"/00:00:00 ");
 		}catch(Exception e){
 			//start_date_field.setText("invalid input");
 			start_date_field.setStyle("-fx-text-inner-color: red;");

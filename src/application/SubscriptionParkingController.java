@@ -76,7 +76,7 @@ public class SubscriptionParkingController {
 			//String startDate = format.format(start_date_field.getValue());		
 			if(start_date_field.getValue().isBefore(LocalDate.now()))
 				throw new Exception();			
-			sent.append(start_date_field.getValue()+" ");
+			sent.append(start_date_field.getValue()+"/00:00:00 ");
 		}catch(Exception e){
 			//start_date_field.setText("invalid input");
 			start_date_field.setStyle("-fx-text-inner-color: red;");
@@ -115,6 +115,7 @@ public class SubscriptionParkingController {
 			AlertBox.display("Loading .. click OK plese");
 			while(client.Done==false)
 			{
+				System.out.println("while");
 				if(client.Done==true)
 					break;
 			}
