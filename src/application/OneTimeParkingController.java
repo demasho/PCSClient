@@ -143,10 +143,19 @@ public class OneTimeParkingController implements Initializable {
 		         arrivalTimeInMilliSeconds = cal.getTimeInMillis();
 		         
 		         //making sure the client didn't enter an older date
+		         
 		         if(currentTimeInMilliseconds > arrivalTimeInMilliSeconds) {
 		    		 throw new Exception();
 		         }
-					sent.append(start_date_text.getValue()+"/"+arrivalTime_HH+":"+ arrivalTime_MM+":00 ");
+		         if(arrivalTime_HH<10 && arrivalTime_MM <10)
+					sent.append(start_date_text.getValue()+"/"+"0"+arrivalTime_HH+":"+ "0"+arrivalTime_MM+":00 ");
+		         else if (arrivalTime_HH <10)
+					sent.append(start_date_text.getValue()+"/"+"0"+arrivalTime_HH+":"+arrivalTime_MM+":00 ");
+		         else if (arrivalTime_MM<10)
+						sent.append(start_date_text.getValue()+"/"+arrivalTime_HH+":"+ "0"+arrivalTime_MM+":00 ");
+		         else 
+						sent.append(start_date_text.getValue()+"/"+arrivalTime_HH+":"+arrivalTime_MM+":00 ");
+
 		         
 		         arrivalSummaryString = cal.getTime().toString();
 
@@ -170,7 +179,14 @@ public class OneTimeParkingController implements Initializable {
 		         if(arrivalTimeInMilliSeconds > leavingTimeInMilliSeconds) {
 		    		 throw new Exception();
 		         }
-					sent.append(end_date_text.getValue()+"/"+leavingTime_HH+":"+ arrivalTime_MM+":00 ");
+		         if(leavingTime_HH<10 && leavingTime_MM <10)
+					sent.append(end_date_text.getValue()+"/"+"0"+leavingTime_HH+":"+ "0"+leavingTime_MM+":00 ");
+		         else if (leavingTime_HH <10)
+					sent.append(end_date_text.getValue()+"/"+"0"+leavingTime_HH+":"+leavingTime_MM+":00 ");
+		         else if (leavingTime_MM<10)
+						sent.append(end_date_text.getValue()+"/"+leavingTime_HH+":"+ "0"+leavingTime_MM+":00 ");
+		         else 
+						sent.append(end_date_text.getValue()+"/"+leavingTime_HH+":"+leavingTime_MM+":00 ");
 
 		         leavingSummaryString = cal.getTime().toString();
 		         
