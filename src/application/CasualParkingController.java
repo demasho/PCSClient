@@ -89,8 +89,10 @@ public class CasualParkingController extends Main implements Initializable{
 		}
 
 		try {
-			end_minute =end_minute_field.getText().trim();
-			end_hour =end_hour_field.getText().trim();
+			end_hour =end_hour_field.getText().trim().length() > 1 ? 
+					end_hour_field.getText().trim() : "0"+end_hour_field.getText().trim();
+			end_minute =end_minute_field.getText().trim().length() > 1 ? 
+					end_minute_field.getText().trim() : "0"+end_minute_field.getText().trim();						
 			if(!Validator.isValidEndTime(end_minute, end_hour))
 				throw new Exception();
 			Date now = new Date();
