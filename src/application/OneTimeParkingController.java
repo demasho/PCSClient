@@ -74,7 +74,7 @@ public class OneTimeParkingController implements Initializable {
 		sent.append("OneTimeOrders : ");
 		String person_id = null;
 		String car_id;
-		String park_id;
+		String park_id="111";
 		String start_date;
 		String start_time_hour;
 		String start_time_minute;
@@ -191,7 +191,7 @@ public class OneTimeParkingController implements Initializable {
 		         leavingSummaryString = cal.getTime().toString();
 		         
 		     } catch(Exception e) {
-		    	
+		    	flag=false;
 		     }
 				try {
 					email=email_field.getText().trim();
@@ -233,7 +233,7 @@ public class OneTimeParkingController implements Initializable {
 		else
 			AlertBox.display("הזמנת חניה", "הנתונים שגויים", "נא לעדכן את הנתונים");	
 		Stage curr = (Stage)next_order_button.getScene().getWindow();
-		curr.close();
+	//	curr.close();
 
 
 	}
