@@ -110,19 +110,6 @@ public class OneTimeParkingController implements Initializable {
 		
     	
 	
-			try {
-				email=email_field.getText().trim();
-				if(!Validator.isValidEmailAddress(email))
-				{
-					throw new Exception();
-
-				}
-				sent.append(email+" ");
-			}catch(Exception e){
-				email_field.setText("invalid input");
-				email_field.setStyle("-fx-text-inner-color: red;");
-				flag=false;
-			}
 	//		System.out.println("Here: " + sent);
 
 			Calendar cal = Calendar.getInstance();         
