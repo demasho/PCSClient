@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.chrono.ChronoLocalDate;
+import java.util.Calendar;
 import java.util.Date;
 
 import client.ChatClient;
@@ -93,6 +94,7 @@ public class SubscriptionSParkingController {
 		car_id_text8.setStyle("-fx-text-inner-color: black;");
 		email_field.setStyle("-fx-text-inner-color: black;");
 		numberOfCars.setStyle("-fx-text-inner-color: black;");
+		start_date_field.setStyle("-fx-text-inner-color: black;");
 		try
 		{
 			person_id=person_id_text.getText().trim();
@@ -105,14 +107,27 @@ public class SubscriptionSParkingController {
 			flag=false;
 		}
 
-		try {
-			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd/HH:mm:ss");
-			String startDate = format.format(start_date_field.getValue());		
-			if(start_date_field.getValue().isBefore(LocalDate.now()))
-				throw new Exception();			
-			sent.append(startDate+"/00:00:00 ");
+		Calendar cal = Calendar.getInstance();
+        long currentdaymilliseconds = 0;
+        long orderstartmilisenconds = 0;
+    	try {
+	    	 int currentYear = cal.get(Calendar.YEAR);
+	    	 int currentMonth = cal.get(Calendar.MONTH);
+	    	 int currentDay = cal.get(Calendar.DAY_OF_MONTH);
+	    	 int year = start_date_field.getValue().getYear();
+	    	 int month = start_date_field.getValue().getMonthValue();
+	    	 int day = start_date_field.getValue().getDayOfMonth();
+	    	 cal.clear();
+	    	 cal.set(currentYear, currentMonth, currentDay);
+	    	 currentdaymilliseconds = cal.getTimeInMillis();
+	    	 cal.clear();
+	         cal.set(year, month-1, day);
+	         orderstartmilisenconds = cal.getTimeInMillis();
+	         if(currentdaymilliseconds > orderstartmilisenconds) {
+	    		 throw new Exception();
+	         }		
+			sent.append(start_date_field.getValue()+"/00:00:00 ");
 		}catch(Exception e){
-			//start_date_field.setText("invalid input");
 			start_date_field.setStyle("-fx-text-inner-color: red;");
 			flag=false;
 		}

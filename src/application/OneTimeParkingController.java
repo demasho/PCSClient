@@ -107,37 +107,9 @@ public class OneTimeParkingController implements Initializable {
 
 		park_id=park_id_text.getSelectionModel().getSelectedItem().toString();
 		sent.append(park_id+" ");
-		try {
-			LocalDate startlocalDate = start_date_text.getValue();
-			try {
-				start_time_minute =start_minute_text.getText().trim();
-				start_time_hour =start_hour_text.getText().trim();
-				if(!Validator.isValidEndTime(start_time_minute, start_time_hour))
-					throw new Exception();
-				sent.append(startlocalDate);
-				sent.append("/"+start_time_hour + ":" + start_time_minute + ":00 ");
-			}catch(Exception e){
-				start_hour_text.setText("invalid input");
-				start_hour_text.setStyle("-fx-text-inner-color: red;");
-				start_minute_text.setText("invalid input");
-				start_minute_text.setStyle("-fx-text-inner-color: red;");
-				flag=false;
-			}
-			LocalDate endlocalDate=end_date_text.getValue();
-			try {
-				end_time_minute =end_minute_field.getText().trim();
-				end_time_hour =end_hour_field.getText().trim();
-				if(!Validator.isValidEndTime(end_time_minute, end_time_hour))
-					throw new Exception();
-				sent.append(endlocalDate);
-				sent.append("/"+end_time_hour + ":" + end_time_minute + ":00 ");
-			}catch(Exception e){
-				end_hour_field.setText("invalid input");
-				end_hour_field.setStyle("-fx-text-inner-color: red;");
-				end_minute_field.setText("invalid input");
-				end_minute_field.setStyle("-fx-text-inner-color: red;");
-				flag=false;
-			}
+		
+    	
+	
 			try {
 				email=email_field.getText().trim();
 				if(!Validator.isValidEmailAddress(email))
@@ -151,22 +123,97 @@ public class OneTimeParkingController implements Initializable {
 				email_field.setStyle("-fx-text-inner-color: red;");
 				flag=false;
 			}
-			System.out.println("Here: " + sent);
+	//		System.out.println("Here: " + sent);
 
-			try {
-				car_id=car_id_text.getText().trim();
-				if( Validator.isValidCarNumber(car_id)==false)
-					throw new Exception();
-				sent.append(car_id+" ");
-			}catch(Exception e){
-				car_id_text.setText("invalid input");
-				car_id_text.setStyle("-fx-text-inner-color: red;");
-				flag=false;
-			}
-		}catch(Exception e)
-		{
+			Calendar cal = Calendar.getInstance();         
+	    	 //arrival and leaving date/time check 
+	         long leavingTimeInMilliSeconds = 0;
+	         long currentTimeInMilliseconds = 0;
+	         String leavingSummaryString = "";
+	         int leavingTime_HH = 0;
+	         int leavingTime_MM = 0;
+		     int arrivalTime_HH = 0;
+		     int arrivalTime_MM = 0;
+		     long arrivalTimeInMilliSeconds = 0;
+		     String arrivalSummaryString = "";
+		     try {
+		    	 //if this is empty an exception will be thrown
+		    	 int arrivalYear = start_date_text.getValue().getYear();
+		    	 int arrivalMonth = start_date_text.getValue().getMonthValue();
+		    	 int arrivalDay = start_date_text.getValue().getDayOfMonth();
+		    	 
+		    	 //computing current time in milliseconds
+		    	 currentTimeInMilliseconds = System.currentTimeMillis();		    	 
 
-		}
+		    	 arrivalTime_HH = Integer.parseInt(start_hour_text.getText().toString().trim());
+		    	 arrivalTime_MM = Integer.parseInt(start_minute_text.getText().toString().trim());
+		    	 if((arrivalTime_HH < 0) || (arrivalTime_HH > 24) || (arrivalTime_MM < 0) || (arrivalTime_MM > 59)) {
+		    		 throw new Exception();
+		    	 }		    	 
+		         cal.clear();
+		         cal.set(arrivalYear, arrivalMonth-1, arrivalDay, arrivalTime_HH, arrivalTime_MM, 0);
+		         //computing arrival time in milliseconds
+		         arrivalTimeInMilliSeconds = cal.getTimeInMillis();
+		         
+		         //making sure the client didn't enter an older date
+		         if(currentTimeInMilliseconds > arrivalTimeInMilliSeconds) {
+		    		 throw new Exception();
+		         }
+					sent.append(start_date_text.getValue()+"/"+arrivalTime_HH+":"+ arrivalTime_MM+":00 ");
+		         
+		         arrivalSummaryString = cal.getTime().toString();
+
+		         //if this is empty an exception will be thrown
+	        	 int leavingYear = end_date_text.getValue().getYear();
+	        	 int leavingMonth = end_date_text.getValue().getMonthValue();
+	        	 int leavingDay = end_date_text.getValue().getDayOfMonth();
+	        	 		    	 
+	        	 leavingTime_HH = Integer.parseInt(end_hour_field.getText().toString().trim());
+	        	 leavingTime_MM = Integer.parseInt(end_minute_field.getText().toString().trim());
+		    	 if((leavingTime_HH < 0) || (leavingTime_HH > 24) || (leavingTime_MM < 0) || (leavingTime_MM > 59)) {
+		    		 throw new Exception();
+		    	 }
+		    	 
+		         cal.clear();
+		         cal.set(leavingYear, leavingMonth-1, leavingDay, leavingTime_HH, leavingTime_MM, 0);
+		         //computing leaving time in milliseconds
+		         leavingTimeInMilliSeconds = cal.getTimeInMillis();
+
+		         //making sure the client didn't enter an older date
+		         if(arrivalTimeInMilliSeconds > leavingTimeInMilliSeconds) {
+		    		 throw new Exception();
+		         }
+					sent.append(end_date_text.getValue()+"/"+leavingTime_HH+":"+ arrivalTime_MM+":00 ");
+
+		         leavingSummaryString = cal.getTime().toString();
+		         
+		     } catch(Exception e) {
+		    	
+		     }
+				try {
+					email=email_field.getText().trim();
+					if(!Validator.isValidEmailAddress(email))
+					{
+						throw new Exception();
+
+					}
+					sent.append(email+" ");
+				}catch(Exception e){
+					email_field.setText("invalid input");
+					email_field.setStyle("-fx-text-inner-color: red;");
+					flag=false;
+				}
+
+		     try {
+					car_id=car_id_text.getText().trim();
+					if( Validator.isValidCarNumber(car_id)==false)
+						throw new Exception();
+					sent.append(car_id+" ");
+				}catch(Exception e){
+					car_id_text.setText("invalid input");
+					car_id_text.setStyle("-fx-text-inner-color: red;");
+					flag=false;
+				}
 
 		if(flag==true)
 		{		

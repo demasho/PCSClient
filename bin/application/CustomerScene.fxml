@@ -40,6 +40,6 @@
          </children>
       </AnchorPane>
       <Button fx:id="payButton" mnemonicParsing="false" onMouseClicked="#PayButtonClick" prefHeight="25.0" prefWidth="87.0" text="תשלום" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-      <Button fx:id="pricesButton" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#ShowPricesClick" prefHeight="23.0" prefWidth="89.0" text="מחירים" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+      <Button fx:id="pricesButton" alignment="CENTER" disable="true" mnemonicParsing="false" onMouseClicked="#ShowPricesClick" prefHeight="23.0" prefWidth="89.0" text="מחירים" GridPane.columnIndex="3" GridPane.rowIndex="6" />
    </children>
 </GridPane>
