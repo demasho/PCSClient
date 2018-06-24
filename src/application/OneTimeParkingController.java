@@ -92,6 +92,8 @@ public class OneTimeParkingController implements Initializable {
 		end_minute_field.setStyle("-fx-text-inner-color: black;");
 		start_hour_text.setStyle("-fx-text-inner-color: black;");
 		start_minute_text.setStyle("-fx-text-inner-color: black;");
+		end_date_text.setStyle("-fx-text-inner-color: black;");
+		start_date_text.setStyle("-fx-text-inner-color: black;");
 		////////////<CUSTOMER_ID> <PARKING_ID>  <ENTRY_DATE> <RELEASE_DATE> <E_MAIL> <CAR_NUMBER>
 		try
 		{
@@ -105,8 +107,13 @@ public class OneTimeParkingController implements Initializable {
 			flag=false;
 		}
 
-		park_id=park_id_text.getSelectionModel().getSelectedItem().toString();
-		sent.append(park_id+" ");
+		try {
+			park_id=park_id_text.getSelectionModel().getSelectedItem().toString();
+				sent.append(park_id + " ");
+		}catch(Exception e)
+		{
+			sent.append("111" + " ");
+		}
 		
     	
 	
@@ -191,6 +198,12 @@ public class OneTimeParkingController implements Initializable {
 		         leavingSummaryString = cal.getTime().toString();
 		         
 		     } catch(Exception e) {
+					end_date_text.setStyle("-fx-text-inner-color: red;");
+					start_date_text.setStyle("-fx-text-inner-color: red;");
+					start_hour_text.setStyle("-fx-text-inner-color: red;");
+					start_minute_text.setStyle("-fx-text-inner-color: red;");
+					end_hour_field.setStyle("-fx-text-inner-color: red;");
+					end_minute_field.setStyle("-fx-text-inner-color: red;");
 		    	flag=false;
 		     }
 				try {

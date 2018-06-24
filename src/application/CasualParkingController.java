@@ -78,9 +78,13 @@ public class CasualParkingController extends Main implements Initializable{
 		email_field.setStyle("-fx-text-inner-color: black;");
 		park_id_text.setStyle("-fx-text-inner-color: black;");
 		//////////
-		
+		try {
 			park_id=park_id_text.getSelectionModel().getSelectedItem().toString();
-			sent.append(park_id + " ");
+				sent.append(park_id + " ");
+		}catch(Exception e)
+		{
+			sent.append("111" + " ");
+		}
 
 		try {
 			end_hour =end_hour_field.getText().trim().length() > 1 ? 
